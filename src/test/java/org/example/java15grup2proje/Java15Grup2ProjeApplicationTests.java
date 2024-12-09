@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class Java15Grup2ProjeApplicationTests {
-	
+	//merhabav vvv
 	@Test
 	void contextLoads() {
 	}
