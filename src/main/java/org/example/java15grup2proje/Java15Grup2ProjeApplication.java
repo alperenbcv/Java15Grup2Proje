@@ -5,11 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Java15Grup2ProjeApplication {
-	//Alperen
 	public static void main(String[] args) {
 		SpringApplication.run(Java15Grup2ProjeApplication.class, args);
 	}
-	// ikinci commit
-	
-	//mehmet
 }
