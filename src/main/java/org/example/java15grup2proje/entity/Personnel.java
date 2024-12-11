@@ -23,7 +23,7 @@ public class Personnel extends BaseEntity {
 	@Enumerated(value = EnumType.STRING)
 	private EDepartment department;
 	@Enumerated(value = EnumType.STRING)
-	private ETitle jobTitle;
+	private ETitle title;
 	private Long hireDate;
 	private Long birthDate;
 	private boolean isOnLeave;
