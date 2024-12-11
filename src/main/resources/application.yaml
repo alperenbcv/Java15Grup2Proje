@@ -27,7 +27,7 @@ logging:
       max-file-size: 2MB
 
 
-java15:
+java15grup2proje:
   jwt:
     secret-key: aaa
     issuer: asfasfasfasfas
