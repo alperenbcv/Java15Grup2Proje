@@ -1,4 +1,5 @@
 package org.example.java15grup2proje.entity;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.java15grup2proje.entity.enums.EState;
@@ -7,7 +8,13 @@ import org.example.java15grup2proje.entity.enums.EState;
 @AllArgsConstructor
 @SuperBuilder
 @Data
-public class User {
+@EqualsAndHashCode(callSuper = false)
+@Entity
+@Table(name = "tbluser")
+public class User extends BaseEntity{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
 	String name;
 	String surname;
 	String email;
@@ -16,5 +23,5 @@ public class User {
 	String pictureUrl;
 	String address;
 	boolean isAccountVerified;
-	
+	boolean isAccountActive;
 }
