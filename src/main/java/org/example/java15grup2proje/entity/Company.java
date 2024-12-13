@@ -14,6 +14,9 @@ public class Company extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
+	@Column(unique = true)
 	String companyName;
-	private Long membershipPlanId;
+	@Column(unique = true)
+	String companyMail;
+	Long membershipPlanId;
 }

@@ -4,5 +4,6 @@ public class Comment {
 	Long managerId;
 	String comment;
 	Integer rating;
+	private String companyMail;
 	
 }
