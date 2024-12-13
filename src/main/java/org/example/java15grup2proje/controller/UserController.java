@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.example.java15grup2proje.constant.RestApi.*;
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(USER)
+@RequestMapping(AUTH)
 public class UserController {
 	private final UserService userService;
 	

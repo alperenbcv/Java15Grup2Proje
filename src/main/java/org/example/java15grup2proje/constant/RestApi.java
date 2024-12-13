@@ -5,7 +5,7 @@ public class RestApi {
 	public static final String DEVELOPER = "/dev";
 	public static final String ROOT = VERSION + DEVELOPER;
 	
-	public static final String USER = ROOT + "/user";
+	public static final String AUTH = ROOT + "/auth";
 	
 	public static final String REGISTER = ROOT + "/register";
 	public static final String LOGIN = ROOT + "/login";
