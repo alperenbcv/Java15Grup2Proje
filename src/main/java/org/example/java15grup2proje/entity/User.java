@@ -23,6 +23,8 @@ public class User extends BaseEntity{
 	String phoneNumber;
 	String pictureUrl;
 	String address;
-	boolean isAccountVerified;
-	boolean isAccountActive;
+	@Builder.Default
+	boolean isAccountVerified = false;
+	@Builder.Default
+	boolean isAccountActive = false;
 }
