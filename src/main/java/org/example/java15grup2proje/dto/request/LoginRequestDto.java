@@ -6,8 +6,8 @@ import jakarta.validation.constraints.Size;
 
 public record LoginRequestDto(
 		@NotNull
-		@Size(min = 3, max = 40)
-		String userName,
+		
+		String email,
 		
 		@NotNull
 		@Size(min = 8, max = 64)
