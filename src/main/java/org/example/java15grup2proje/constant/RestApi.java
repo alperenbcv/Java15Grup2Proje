@@ -8,4 +8,5 @@ public class RestApi {
 	public static final String USER = ROOT + "/user";
 	
 	public static final String REGISTER = ROOT + "/register";
+	public static final String LOGIN = ROOT + "/login";
 }
