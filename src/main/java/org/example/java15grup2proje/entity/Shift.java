@@ -1,11 +1,23 @@
 package org.example.java15grup2proje.entity;
 
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.example.java15grup2proje.entity.enums.EShiftType;
 
 import java.util.List;
 
-public class Shift {
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
+@Data
+@Entity
+@Table(name = "tblshift")
+public class Shift extends BaseEntity{
+	@Enumerated(EnumType.STRING)
 	EShiftType shiftType;
 	Long startDate;
 	Long endDate;
