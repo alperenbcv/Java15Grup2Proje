@@ -21,6 +21,5 @@ public class Manager extends BaseEntity{
 	@Enumerated(value = EnumType.STRING)
 	private EDepartment department;
 	private ETitle title;
-	private String companyMail;
 	
 }
