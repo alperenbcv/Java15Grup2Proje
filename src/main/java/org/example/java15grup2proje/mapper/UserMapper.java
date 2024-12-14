@@ -9,11 +9,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.security.NoSuchAlgorithmException;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = PassEncTech2.class)
 public interface UserMapper {
 	UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 	
-	@Mapping(target = "password", expression = "java(PassEncTech2(dto" +
-			".password()))")
-	User fromRegisterRequestDto(RegisterRequestDto dto);
+	@Mapping(target = "password", expression = "java(PassEncTech2.toHexString" +
+			"(PassEncTech2.getSHA(dto.password())))")
+	User fromRegisterRequestDto(RegisterRequestDto dto) throws NoSuchAlgorithmException;
 }

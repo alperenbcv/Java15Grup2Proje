@@ -12,6 +12,7 @@ import org.example.java15grup2proje.repository.UserRepository;
 import org.example.java15grup2proje.utility.JwtManager;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
@@ -21,7 +22,13 @@ public class UserService {
 	private final JwtManager jwtManager;
 	
 	public User register(RegisterRequestDto dto) {
-		return userRepository.save(UserMapper.INSTANCE.fromRegisterRequestDto(dto));
+		try{
+			return userRepository.save(UserMapper.INSTANCE.fromRegisterRequestDto(dto));
+		}
+		catch (NoSuchAlgorithmException e) {
+			// TODO nosuchalgorithmException yaz
+			throw new RuntimeException();
+		}
 	}
 	
 	public String login(@Valid LoginRequestDto dto) {
