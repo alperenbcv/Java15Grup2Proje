@@ -27,7 +27,7 @@ public class UserService {
 	public String login(@Valid LoginRequestDto dto) {
 		Optional<User> userOptional = userRepository.findByEmailAndPassword(dto.email(), dto.password());
 		if (userOptional.isEmpty())
-			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_USERNAME_OR_PASSWORD);
+			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_MAIL_OR_PASSWORD);
 		String token = jwtManager.createToken(userOptional.get().getId());
 		
 		return token;
