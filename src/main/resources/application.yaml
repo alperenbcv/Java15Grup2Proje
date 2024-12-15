@@ -4,7 +4,7 @@ server:
 spring:
   security:
     user:
-      name: ${java15grup2proje_security_issuer}
+      name: ${java15grup2proje_security_name}
       password: ${java15grup2proje_security_password}
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -28,5 +28,5 @@ logging:
 
 java15grup2proje:
   jwt:
-    secret-key: aaa
-    issuer: asfasfasfasfas
+    secret-key: ${java15grup2proje_jwt_secretkey}
+    issuer: ${java15grup2proje_jwt_issuer}
