@@ -4,8 +4,8 @@ server:
 spring:
   security:
     user:
-      name: emirhan
-      password: 1234567a
+      name: ${java15grup2proje_security_issuer}
+      password: ${java15grup2proje_security_password}
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${java15grup2proje_postgre_url}
