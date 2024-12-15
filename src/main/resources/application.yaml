@@ -8,24 +8,23 @@ spring:
       password: 1234567a
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/java15grup2proje
-    username: postgres
-    password: root
+    url: ${java15grup2proje_postgre_url}
+    username: ${java15grup2proje_postgre_username}
+    password: ${java15grup2proje_postgre_password}
   jpa:
     hibernate:
       ddl-auto: create
     show-sql: true
 
 logging:
-  file:
-    name: proje.log
   level:
     root: info
     com.muhammet.java15_x: trace
   logback:
     rollingpolicy:
       max-file-size: 2MB
-
+  file:
+    path: ./log
 
 java15grup2proje:
   jwt:
