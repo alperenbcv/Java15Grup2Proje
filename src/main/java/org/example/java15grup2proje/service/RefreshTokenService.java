@@ -6,6 +6,7 @@ import org.example.java15grup2proje.entity.RefreshToken;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.repository.RefreshTokenRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -16,8 +17,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RefreshTokenService {
 	private final RefreshTokenRepository refreshTokenRepository;
-	// TODO conf file'dan atama yap
-	private final Long refreshTokenDurationMs = 100_000L;
+	
+	@Value("${java15grup2proje.refreshtoken.duration}")
+	private Long refreshTokenDurationMs;
 	
 	private final UserService userService;
 	

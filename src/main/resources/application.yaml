@@ -30,3 +30,5 @@ java15grup2proje:
   jwt:
     secret-key: ${java15grup2proje_jwt_secretkey}
     issuer: ${java15grup2proje_jwt_issuer}
+  refreshtoken:
+    duration: ${java15grup2proje_refreshtoken_duration}
