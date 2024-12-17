@@ -1,4 +1,4 @@
-package org.example.mapper;
+package org.example.java15grup2proje.mapper;
 
 import org.example.java15grup2proje.dto.request.AdminRegisterRequestDto;
 import org.example.java15grup2proje.entity.Admin;

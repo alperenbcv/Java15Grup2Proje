@@ -2,8 +2,8 @@ package org.example.java15grup2proje.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.exception.ErrorType;
-import org.example.exception.Java15Grup2ProjeAppException;
+import org.example.java15grup2proje.exception.ErrorType;
+import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
 import org.example.java15grup2proje.dto.request.RegisterRequestDto;
 import org.example.java15grup2proje.dto.response.BaseResponse;

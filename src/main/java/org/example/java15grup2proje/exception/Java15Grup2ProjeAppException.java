@@ -1,4 +1,4 @@
-package org.example.exception;
+package org.example.java15grup2proje.exception;
 
 public class Java15Grup2ProjeAppException extends RuntimeException {
 	private ErrorType errorType;

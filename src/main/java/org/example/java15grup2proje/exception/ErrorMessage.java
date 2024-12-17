@@ -1,4 +1,4 @@
-package org.example.exception;
+package org.example.java15grup2proje.exception;
 
 import java.util.List;
 
