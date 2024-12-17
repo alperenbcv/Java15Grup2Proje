@@ -11,10 +11,11 @@ import org.example.java15grup2proje.entity.enums.EGender;
 import org.example.java15grup2proje.entity.enums.ETitle;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
 @Data
 @Entity
-@Table(name = "tblmanager")
-public class Manager extends User{
-	
+@Table(name = "tblemployee")
+public class Employee extends User{
+	private Long managerId;
 }

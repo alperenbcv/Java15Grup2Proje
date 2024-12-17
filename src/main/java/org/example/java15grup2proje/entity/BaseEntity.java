@@ -18,10 +18,10 @@ import java.time.ZoneId;
 @SuperBuilder
 @Data
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	String id;
 	@Builder.Default
 	private Long createdAt = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 	@Builder.Default
