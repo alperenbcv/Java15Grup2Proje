@@ -1,6 +1,20 @@
 package org.example.java15grup2proje.entity;
 
-public class PersonnelFile {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
+@Data
+@Entity
+@Table(name = "tblpersonnelfile")
+public class PersonnelFile extends BaseEntity {
 	Long personnelId;
 	String fileType;
 	String fileName;

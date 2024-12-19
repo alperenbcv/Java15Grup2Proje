@@ -1,20 +1,20 @@
 package org.example.java15grup2proje.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "tblmembershipplan")
 public class MembershipPlan extends BaseEntity{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
 	Long companyId;
 	Long startDate;
 	Long endDate;

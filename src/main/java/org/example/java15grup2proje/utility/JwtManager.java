@@ -1,6 +1,5 @@
 package org.example.java15grup2proje.utility;
 
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -14,15 +13,13 @@ import java.util.Optional;
 
 @Service
 public class JwtManager {
-	
-	
 	@Value("${java15grup2proje.jwt.secret-key}")
 	private String secretKey;
 	@Value("${java15grup2proje.jwt.issuer}")
 	private String issuer;
-	private final Long exDate=1000L*60*60;
+	private final Long exDate=1000L*60;
 	
-	public String createToken(Long authId){
+	public String createToken(String authId, String userType){
 		Date createdDate=new Date(System.currentTimeMillis());
 		Date expirationDate=new Date(System.currentTimeMillis()+exDate);
 		Algorithm algorithm=Algorithm.HMAC512(secretKey);
@@ -33,6 +30,7 @@ public class JwtManager {
 		                  .withExpiresAt(expirationDate)
 		                  .withClaim("authId", authId)
 		                  .withClaim("key","JX_15_TJJJ")
+						  .withClaim("role",userType)
 		                  .sign(algorithm);
 		return token;
 	}
@@ -50,7 +48,6 @@ public class JwtManager {
 		catch (Exception exception) {
 			return Optional.empty();
 		}
-		
-		
+
 	}
 }
