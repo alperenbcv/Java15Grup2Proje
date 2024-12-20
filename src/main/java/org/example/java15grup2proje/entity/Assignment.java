@@ -6,6 +6,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.java15grup2proje.entity.enums.EState;
@@ -14,6 +15,7 @@ import org.example.java15grup2proje.entity.enums.EState;
 @AllArgsConstructor
 @SuperBuilder
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "tblassignment")
 public class Assignment extends BaseEntity {

@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+
 public class Java15Grup2ProjeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Java15Grup2ProjeApplication.class, args);
