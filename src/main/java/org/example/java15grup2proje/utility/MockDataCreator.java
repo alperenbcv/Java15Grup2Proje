@@ -48,6 +48,9 @@ public class MockDataCreator {
 				                         .gender(EGender.MAN)
 				                         .companyId("Example Company ID")
 				                         .role(ERole.MANAGER)
+						.phoneNumber("05554443322")
+						.address("Istanbul/Turkey")
+						.pictureUrl("https://images2.fanpop.com/images/photos/7900000/JOHN-DOE-john-doe-7969094-2087-2560.jpg")
 				                         .build();
 				managerRepository.save(manager);
 				System.out.println("Mock Manager Created: " + manager);
