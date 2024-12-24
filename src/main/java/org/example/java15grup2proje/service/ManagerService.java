@@ -46,4 +46,11 @@ public class ManagerService {
 		return token;
 	}
 	
+	public Manager getProfile(@Valid String token) {
+		Optional<String> optManagerId = jwtManager.validateToken(token);
+		if(optManagerId.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION);
+		Optional<Manager> optManager = managerRepository.findById(optManagerId.get());
+		if (optManager.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		return optManager.get();
+ 	}
 }

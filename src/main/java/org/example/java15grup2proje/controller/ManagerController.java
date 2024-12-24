@@ -2,6 +2,7 @@ package org.example.java15grup2proje.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.entity.Manager;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
@@ -31,11 +32,20 @@ public class ManagerController {
 	
 	@PostMapping(REGISTER)
 	public ResponseEntity<BaseResponse<Boolean>> register(@RequestBody @Valid RegisterRequestDto dto){
-		System.out.println(dto);
+		
 		if(!dto.password().equals(dto.rePassword()))
 			throw new Java15Grup2ProjeAppException(ErrorType.PASSWORD_ERROR);
 		managerService.managerRegister(dto);
 		return ResponseEntity.ok(BaseResponse.<Boolean>builder().code(200).data(true).message("Manager register " +
+				                                                                                      "successful" +
+				                                                                                      ".").success(true).build());
+	}
+	
+	@GetMapping(GET_PROFILE)
+	public ResponseEntity<BaseResponse<Manager>> getProfile(@RequestBody @Valid String token){
+		
+		Manager manager = managerService.getProfile(token);
+		return ResponseEntity.ok(BaseResponse.<Manager>builder().code(200).data(manager).message("Manager register " +
 				                                                                                      "successful" +
 				                                                                                      ".").success(true).build());
 	}
