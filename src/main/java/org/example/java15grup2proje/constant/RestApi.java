@@ -15,4 +15,5 @@ public class RestApi {
 	public static final String GET_ALL_COMPANY_NAMES = "company-list";
 	
 	public static final String GET_PROFILE = "/get-profile";
+	public static final String EDIT_PROFILE = "/edit-profile";
 }

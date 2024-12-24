@@ -2,6 +2,7 @@ package org.example.java15grup2proje.service;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
@@ -25,7 +26,13 @@ public class ManagerService {
 	private final JwtManager jwtManager;
 	private final CompanyService companyService;
 	
-	
+	private Manager tokenToManager(String token){
+		Optional<String> optManagerId = jwtManager.validateToken(token);
+		if(optManagerId.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION);
+		Optional<Manager> optManager = managerRepository.findById(optManagerId.get());
+		if (optManager.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		return optManager.get();
+	}
 	public void managerRegister(@Valid RegisterRequestDto dto){
 		Manager manager = ManagerMapper.INSTANCE.fromRegisterRequestDto(dto);
 		manager.setRole(ERole.MANAGER);
@@ -47,10 +54,18 @@ public class ManagerService {
 	}
 	
 	public Manager getProfile(@Valid String token) {
-		Optional<String> optManagerId = jwtManager.validateToken(token);
-		if(optManagerId.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION);
-		Optional<Manager> optManager = managerRepository.findById(optManagerId.get());
-		if (optManager.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
-		return optManager.get();
+		return tokenToManager(token);
  	}
+	
+	public Manager editProfile(@Valid EditProfileDto dto) {
+		Manager manager = tokenToManager(dto.token());
+		//TODO mapper ile vs iyileştirilebiliyor mu araştır
+		manager.setName(dto.name());
+		manager.setSurname(dto.surname());
+		manager.setEmail(dto.email());
+		manager.setPhoneNumber(dto.phoneNumber());
+		manager.setAddress(dto.address());
+		manager.setGender(dto.gender());
+		return managerRepository.save(manager);
+	}
 }

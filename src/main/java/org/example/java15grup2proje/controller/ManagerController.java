@@ -2,6 +2,7 @@ package org.example.java15grup2proje.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.entity.Manager;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
@@ -42,11 +43,20 @@ public class ManagerController {
 	}
 	
 	@GetMapping(GET_PROFILE)
-	public ResponseEntity<BaseResponse<Manager>> getProfile(@RequestBody @Valid String token){
+	public ResponseEntity<BaseResponse<Manager>> getProfile(String token){
 		
 		Manager manager = managerService.getProfile(token);
 		return ResponseEntity.ok(BaseResponse.<Manager>builder().code(200).data(manager).message("Manager register " +
 				                                                                                      "successful" +
 				                                                                                      ".").success(true).build());
+	}
+	
+	@PostMapping(EDIT_PROFILE)
+	public ResponseEntity<BaseResponse<Manager>> editProfile(@RequestBody @Valid EditProfileDto dto){
+		return ResponseEntity.ok(BaseResponse.<Manager>builder().code(200)
+		                                     .data(managerService.editProfile(dto))
+		                                     .message("Manager register " +
+				                                                                                         "successful" +
+				                                                                                         ".").success(true).build());
 	}
 }
