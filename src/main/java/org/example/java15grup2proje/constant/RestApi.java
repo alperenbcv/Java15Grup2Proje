@@ -13,4 +13,6 @@ public class RestApi {
 	public static final String REGISTER = "/register";
 	public static final String LOGIN = "/login";
 	public static final String GET_ALL_COMPANY_NAMES = "company-list";
+	
+	public static final String GET_PROFILE = "/get-profile";
 }
