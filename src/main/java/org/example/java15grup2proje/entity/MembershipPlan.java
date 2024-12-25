@@ -1,6 +1,7 @@
 package org.example.java15grup2proje.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -12,9 +13,6 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "tblmembershipplan")
 public class MembershipPlan extends BaseEntity{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
 	Long companyId;
 	Long startDate;
 	Long endDate;

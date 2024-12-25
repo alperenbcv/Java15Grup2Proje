@@ -1,5 +1,5 @@
 package org.example.java15grup2proje.entity.enums;
 
 public enum EDepartment {
-	IT, SALES
+	HR, FINANCE, MARKETING, SALES, IT, LEGAL, RESEARCH, ENGINEERING, ADMINISTRATION, PRODUCTION
 }
