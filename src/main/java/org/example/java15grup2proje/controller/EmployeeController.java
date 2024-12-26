@@ -2,6 +2,7 @@ package org.example.java15grup2proje.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.dto.request.EditMyPersonnelRequestDto;
 import org.example.java15grup2proje.entity.Employee;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
@@ -43,7 +44,18 @@ public class EmployeeController {
 	}
 	
 	@GetMapping(GET_MY_PERSONNEL)
-	public ResponseEntity<BaseResponse<List<Employee>>> getPersonnelByManagerId(String token, String companyId ){
-		return
+	public ResponseEntity<BaseResponse<List<Employee>>> getPersonnelByCompanyId(String token){
+		return ResponseEntity.ok(BaseResponse.<List<Employee>>builder()
+				                         .success(true)
+				                         .message("yöneticinin çalışanları başarıyla getirildi")
+				                         .code(200)
+				                         .data(employeeService.getPersonnelByCompanyId(token))
+		                                     .build());
+	}
+	
+	@PostMapping(EDIT_MY_PERSONNEL)
+	public ResponseEntity<BaseResponse<Boolean>> editMyPersonnel(@RequestBody @Valid EditMyPersonnelRequestDto dto){
+		//TODO burası yazılacak
+		return null;
 	}
 }

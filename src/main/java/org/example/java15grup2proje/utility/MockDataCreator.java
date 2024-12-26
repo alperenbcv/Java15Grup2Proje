@@ -67,6 +67,7 @@ public class MockDataCreator {
 				                            .email("jane.smith@example.com")
 				                            .password(PasswordHasher.passwordHash("Alperen1+"))
 				                            .gender(EGender.WOMAN)
+						.companyId("Example Company ID")
 				                            .managerId((manager == null)?"0":manager.getId())
 				                            .role(ERole.EMPLOYEE)
 				                            .build();
