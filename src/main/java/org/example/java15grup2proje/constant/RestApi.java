@@ -19,4 +19,5 @@ public class RestApi {
 	public static final String EDIT_PROFILE = "/edit-profile";
 	public static final String EDIT_PHOTO = "/edit-photo";
 	public static final String GET_MY_PERSONNEL = "/get-my-personnel";
+	public static final String EDIT_MY_PERSONNEL = "/edit-my-personnel";
 }
