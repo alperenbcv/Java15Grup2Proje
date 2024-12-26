@@ -39,8 +39,9 @@ public class MockDataCreator {
 			}
 			
 			// Mock Manager Data
+			Manager manager = null;
 			if (managerRepository.count() == 0) {
-				Manager manager = Manager.builder()
+				manager = Manager.builder()
 				                         .name("John")
 				                         .surname("Doe")
 				                         .email("john.doe@example.com")
@@ -48,11 +49,13 @@ public class MockDataCreator {
 				                         .gender(EGender.MAN)
 				                         .companyId("Example Company ID")
 				                         .role(ERole.MANAGER)
+						.department(EDepartment.IT)
+						.title("Backend Developer")
 						.phoneNumber("05554443322")
 						.address("Istanbul/Turkey")
 						.pictureUrl("https://images2.fanpop.com/images/photos/7900000/JOHN-DOE-john-doe-7969094-2087-2560.jpg")
 				                         .build();
-				managerRepository.save(manager);
+				manager = managerRepository.save(manager);
 				System.out.println("Mock Manager Created: " + manager);
 			}
 			
@@ -64,7 +67,8 @@ public class MockDataCreator {
 				                            .email("jane.smith@example.com")
 				                            .password(PasswordHasher.passwordHash("Alperen1+"))
 				                            .gender(EGender.WOMAN)
-				                            .managerId(1L)
+						.companyId("Example Company ID")
+				                            .managerId((manager == null)?"0":manager.getId())
 				                            .role(ERole.EMPLOYEE)
 				                            .build();
 				employeeRepository.save(employee);

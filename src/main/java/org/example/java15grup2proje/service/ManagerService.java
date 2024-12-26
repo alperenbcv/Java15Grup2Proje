@@ -26,7 +26,7 @@ public class ManagerService {
 	private final JwtManager jwtManager;
 	private final CompanyService companyService;
 	
-	private Manager tokenToManager(String token){
+	public Manager tokenToManager(String token){
 		Optional<String> optManagerId = jwtManager.validateToken(token);
 		if(optManagerId.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION);
 		Optional<Manager> optManager = managerRepository.findById(optManagerId.get());
@@ -60,12 +60,17 @@ public class ManagerService {
 	public Manager editProfile(@Valid EditProfileDto dto) {
 		Manager manager = tokenToManager(dto.token());
 		//TODO mapper ile vs iyileştirilebiliyor mu araştır
-		manager.setName(dto.name());
-		manager.setSurname(dto.surname());
 		manager.setEmail(dto.email());
 		manager.setPhoneNumber(dto.phoneNumber());
 		manager.setAddress(dto.address());
 		manager.setGender(dto.gender());
+		Manager manager2 = managerRepository.save(manager);
+		return manager2;
+	}
+	
+	public Manager editPhoto(String token, String photoUrl) {
+		Manager manager = tokenToManager(token);
+		manager.setPictureUrl(photoUrl);
 		return managerRepository.save(manager);
 	}
 }
