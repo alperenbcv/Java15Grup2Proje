@@ -10,6 +10,7 @@ import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.mapper.UserMapper;
 import org.example.java15grup2proje.repository.UserRepository;
 import org.example.java15grup2proje.utility.JwtManager;
+import org.example.java15grup2proje.utility.PasswordHasher;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
@@ -32,10 +33,14 @@ public class UserService {
 	}
 	
 	public String login(@Valid LoginRequestDto dto) {
-		Optional<User> userOptional = userRepository.findByEmailAndPassword(dto.email(), dto.password());
-		if (userOptional.isEmpty())
+		Optional<User> optionalUser = userRepository.findByEmailAndPassword(dto.email(), dto.password());
+		if (optionalUser.isEmpty())
 			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_MAIL_OR_PASSWORD);
-		String token = jwtManager.createToken(userOptional.get().getId());
+		boolean passwordMatches = PasswordHasher.compareHashedPassword(dto.password(), optionalUser.get().getPassword());
+		if (!passwordMatches) {
+			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_MAIL_OR_PASSWORD);
+		}
+		String token = jwtManager.createToken(optionalUser.get().getId(), "user");
 		
 		return token;
 	}

@@ -3,18 +3,20 @@ package org.example.java15grup2proje.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.example.java15grup2proje.entity.enums.ERole;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "tbladmin")
 public class Admin extends BaseEntity{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
 	boolean isSuperAdmin;
-	
+	@Column(unique = true)
+	String email;
+	String password;
+	@Enumerated(EnumType.STRING)
+	ERole role;
 }

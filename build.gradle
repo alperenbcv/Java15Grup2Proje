@@ -33,6 +33,9 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.bouncycastle:bcprov-jdk18on:1.79'
+
+
 
 
     compileOnly 'org.projectlombok:lombok'

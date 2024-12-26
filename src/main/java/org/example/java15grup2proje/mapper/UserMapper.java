@@ -15,7 +15,8 @@ import java.security.NoSuchAlgorithmException;
 public interface UserMapper {
 	UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 	
-	@Mapping(target = "password", expression = "java(PassEncTech2.toHexString" +
-			"(PassEncTech2.getSHA(dto.password())))")
+	@Mapping(target = "password", expression = "java(org.example.java15grup2proje.utility.PasswordHasher.passwordHash(dto.password()))")
+	@Mapping(target = "birthDate", expression = "java(org.example.java15grup2proje.utility.TimeConverter" +
+			".localDateToEpoch(dto.birthDate()))")
 	User fromRegisterRequestDto(RegisterRequestDto dto) throws NoSuchAlgorithmException;
 }
