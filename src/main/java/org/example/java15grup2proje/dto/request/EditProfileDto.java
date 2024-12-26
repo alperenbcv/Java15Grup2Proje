@@ -10,8 +10,6 @@ import org.example.java15grup2proje.entity.enums.ERole;
 
 public record EditProfileDto (
 	String token,
-	String name,
-	String surname,
 	//TODO unique check
 	String email,
 	String phoneNumber,

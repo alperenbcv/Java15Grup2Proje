@@ -60,12 +60,17 @@ public class ManagerService {
 	public Manager editProfile(@Valid EditProfileDto dto) {
 		Manager manager = tokenToManager(dto.token());
 		//TODO mapper ile vs iyileştirilebiliyor mu araştır
-		manager.setName(dto.name());
-		manager.setSurname(dto.surname());
 		manager.setEmail(dto.email());
 		manager.setPhoneNumber(dto.phoneNumber());
 		manager.setAddress(dto.address());
 		manager.setGender(dto.gender());
+		Manager manager2 = managerRepository.save(manager);
+		return manager2;
+	}
+	
+	public Manager editPhoto(String token, String photoUrl) {
+		Manager manager = tokenToManager(token);
+		manager.setPictureUrl(photoUrl);
 		return managerRepository.save(manager);
 	}
 }
