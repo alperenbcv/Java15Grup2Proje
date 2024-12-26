@@ -16,4 +16,11 @@ public class RestApi {
 	
 	public static final String GET_PROFILE = "/get-profile";
 	public static final String EDIT_PROFILE = "/edit-profile";
+	
+	public static final String LEAVE =ROOT + "/leave";
+	public static final String ADD_LEAVE = "/add-leave";
+//	public static final String LEAVE_LIST = "/leave-list";
+//	public static final String APPROVE_LEAVE = "/approve-leave";
+//
+//	public static final String GET_ALL_EMPLOYEE = "/employee-list";
 }

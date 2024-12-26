@@ -30,7 +30,7 @@ public class JwtManager {
 		                  .withExpiresAt(expirationDate)
 		                  .withClaim("authId", authId)
 		                  .withClaim("key","JX_15_TJJJ")
-						  .withClaim("role",userType)
+		                  .withClaim("role",userType)
 		                  .sign(algorithm);
 		return token;
 	}
@@ -48,6 +48,6 @@ public class JwtManager {
 		catch (Exception exception) {
 			return Optional.empty();
 		}
-
+		
 	}
 }
