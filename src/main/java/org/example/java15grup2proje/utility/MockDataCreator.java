@@ -14,6 +14,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+
 @Configuration
 @RequiredArgsConstructor
 public class MockDataCreator {
@@ -49,6 +51,7 @@ public class MockDataCreator {
 				                         .gender(EGender.MAN)
 				                         .companyId("Example Company ID")
 				                         .role(ERole.MANAGER)
+						.birthDate(TimeConverter.localDateToEpoch(LocalDate.of(2000, 10, 10)))
 						.department(EDepartment.IT)
 						.title("Backend Developer")
 						.phoneNumber("05554443322")
@@ -70,6 +73,7 @@ public class MockDataCreator {
 						.companyId("Example Company ID")
 				                            .managerId((manager == null)?"0":manager.getId())
 				                            .role(ERole.EMPLOYEE)
+						.pictureUrl("https://townsquare.media/site/180/files/2018/02/Jane-Smith-Edited.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89")
 				                            .build();
 				employeeRepository.save(employee);
 				System.out.println("Mock Employee Created: " + employee);
