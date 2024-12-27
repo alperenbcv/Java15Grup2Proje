@@ -77,4 +77,13 @@ public class UserController {
 				                                              ".").success(true).build());
 	}
 	
+	@GetMapping(EDIT_PHOTO)
+	public ResponseEntity<BaseResponse<ProfileResponseDto>> editProfilePhoto(String token, String photoUrl){
+		
+		ProfileResponseDto profile = userService.editPhoto(token, photoUrl);
+		return ResponseEntity.ok(BaseResponse.<ProfileResponseDto>builder().code(200).data(profile).message("Manager register " +
+				                                                                                         "successful" +
+				                                                                                         ".").success(true).build());
+	}
+	
 }

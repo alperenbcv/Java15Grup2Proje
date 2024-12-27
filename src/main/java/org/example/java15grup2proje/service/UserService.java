@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
-import org.example.java15grup2proje.dto.request.RegisterRequestDto;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
 import org.example.java15grup2proje.entity.Admin;
 import org.example.java15grup2proje.entity.Employee;
@@ -18,7 +17,6 @@ import org.example.java15grup2proje.utility.JwtManager;
 import org.example.java15grup2proje.utility.PasswordHasher;
 import org.springframework.stereotype.Service;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Service
@@ -30,28 +28,36 @@ public class UserService {
 	private final EmployeeService employeeService;
 	private final AdminService adminService;
 	
-	public ProfileResponseDto tokenToUser(String token){
-		Optional<String> optUserId = jwtManager.validateToken(token);
-		if(optUserId.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION);
-		Optional<User> optUser = userRepository.findById(optUserId.get());
-		if (optUser.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
-		switch (optUser.get().getRole()){
+	public ProfileResponseDto tokenToProfile(String token){
+		User user = tokenToUser(token);
+		return userToProfile(user);
+	}
+	
+	public ProfileResponseDto userToProfile(User user){
+		switch (user.getRole()){
 			case MANAGER -> {
-				Manager manager = managerService.findById(optUserId.get());
+				Manager manager = managerService.findById(user.getId());
 				return UserMapper.INSTANCE.fromManagerToProfile(manager);
 			}
 			case EMPLOYEE -> {
-				Employee employee = employeeService.findById(optUserId.get());
+				Employee employee = employeeService.findById(user.getId());
 				return UserMapper.INSTANCE.fromEmployeeToProfile(employee);
 			}
 			case ADMIN -> {
-				Admin admin = adminService.findById(optUserId.get());
+				Admin admin = adminService.findById(user.getId());
 				return UserMapper.INSTANCE.fromAdminToProfile(admin);
 			}
 		}
 		throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
 	}
 	
+	public User tokenToUser(String token){
+		Optional<String> optUserId = jwtManager.validateToken(token);
+		if(optUserId.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION);
+		Optional<User> optUser = userRepository.findById(optUserId.get());
+		if (optUser.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		return optUser.get();
+	}
 	
 	public String login(@Valid LoginRequestDto dto) {
 		Optional<User> optionalUser = userRepository.findByEmail(dto.email());
@@ -67,12 +73,19 @@ public class UserService {
 	}
 	
 	public ProfileResponseDto getProfile(String token) {
-		return tokenToUser(token);
+		return tokenToProfile(token);
 	}
 	
 	public ProfileResponseDto editProfile(@Valid EditProfileDto dto) {
-		ProfileResponseDto profile = tokenToUser(dto.token());
+		ProfileResponseDto profile = tokenToProfile(dto.token());
 		UserMapper.INSTANCE.fromEditToProfile(dto, profile);
 		return profile;
+	}
+	
+	public ProfileResponseDto editPhoto(String token, String photoUrl) {
+		User user = tokenToUser(token);
+		user.setPictureUrl(photoUrl);
+		user = userRepository.save(user);
+		return userToProfile(user);
 	}
 }

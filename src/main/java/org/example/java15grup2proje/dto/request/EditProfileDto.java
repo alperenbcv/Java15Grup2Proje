@@ -10,11 +10,10 @@ import org.example.java15grup2proje.entity.enums.ERole;
 
 public record EditProfileDto (
 	String token,
-	//TODO unique check
 	String email,
 	String phoneNumber,
 	String address,
-	EGender gender
-	//TODO birthdate gösterilsin ve değiştirilebilsin
+	EGender gender,
+	Long birthDate
 	){
 }
