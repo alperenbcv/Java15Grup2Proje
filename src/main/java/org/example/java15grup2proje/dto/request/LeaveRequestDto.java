@@ -10,8 +10,8 @@ public record LeaveRequestDto(
 	Long startDate,
 	Long endDate,
 	ELeaveType leaveType,
-	String description,
-	Long appliedDate
+	String description
+	
 	
 	
 ) {

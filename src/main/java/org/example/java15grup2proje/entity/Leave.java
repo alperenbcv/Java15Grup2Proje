@@ -29,4 +29,5 @@ public class Leave extends BaseEntity {
 	String rejectionReason;
 	Long requestDate;
 	Long responseDate;
+	
 }
