@@ -17,7 +17,7 @@ public class JwtManager {
 	private String secretKey;
 	@Value("${java15grup2proje.jwt.issuer}")
 	private String issuer;
-	private final Long exDate=1000L*60;
+	private final Long exDate=1000000L*60;
 	
 	public String createToken(String authId, String userType){
 		Date createdDate=new Date(System.currentTimeMillis());

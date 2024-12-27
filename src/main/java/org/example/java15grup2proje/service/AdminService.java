@@ -40,4 +40,8 @@ public class AdminService {
 		admin.setRole(ERole.ADMIN);
 		adminRepository.save(admin);
 	}
+	
+	public Admin findById(String s) {
+		return adminRepository.findById(s).get();
+	}
 }

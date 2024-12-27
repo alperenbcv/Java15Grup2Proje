@@ -2,6 +2,7 @@ package org.example.java15grup2proje.service;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.entity.Manager;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
@@ -14,6 +15,7 @@ import org.example.java15grup2proje.utility.PasswordHasher;
 import org.example.java15grup2proje.mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class EmployeeService {
 	private final JwtManager jwtManager;
 	private final EmployeeRepository employeeRepository;
+	private final ManagerService managerService;
 	
 	public void employeeRegister(@Valid RegisterRequestDto dto){
 		Employee employee = EmployeeMapper.INSTANCE.fromRegisterRequestDto(dto);
@@ -39,5 +42,15 @@ public class EmployeeService {
 		}
 		String token = jwtManager.createToken(optionalEmployee.get().getId(),optionalEmployee.get().getRole().toString());
 		return token;
+	}
+	
+	public List<Employee> getPersonnelByCompanyId(String token) {
+		Manager manager = managerService.tokenToManager(token);
+		String companyId = manager.getCompanyId();
+		return employeeRepository.findAllByCompanyId(companyId);
+	}
+	
+	public Employee findById(String s) {
+		return employeeRepository.findById(s).get();
 	}
 }
