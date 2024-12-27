@@ -74,6 +74,167 @@ public class MockDataCreator {
 				employeeRepository.save(employee);
 				System.out.println("Mock Employee Created: " + employee);
 			}
+
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Burak")
+						.surname("BB")
+						.email("burak.bb@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Mary")
+						.surname("Christmas")
+						.email("mary.Christmas@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.WOMAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Emirhan")
+						.surname("EE")
+						.email("Emirhan.EE@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Hilal")
+						.surname("Yıldız")
+						.email("hilal.yildizbayraklaribayrakyapan@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.WOMAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Quenn")
+						.surname("King")
+						.email("Quen.King@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.WOMAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Ajda")
+						.surname("Pekkan")
+						.email("Ajda.Pekkan@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.WOMAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Mauro")
+						.surname("İcardi")
+						.email("Mauro.Icardi@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Alperen")
+						.surname("BV")
+						.email("Alperen.Bv@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Mehmet")
+						.surname("TN")
+						.email("Mehmet.Tn@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Fernado")
+						.surname("Muslera")
+						.email("Fernando.Muslera@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+			if (employeeRepository.count() == 0) {
+				Employee employee = Employee.builder()
+						.name("Simge")
+						.surname("Sagin")
+						.email("Simge.Sagin@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.managerId((manager == null)?"0":manager.getId())
+						.role(ERole.EMPLOYEE)
+						.build();
+				employeeRepository.save(employee);
+				System.out.println("Mock Employee Created: " + employee);
+			}
+
+			if (managerRepository.count() == 0) {
+				manager = Manager.builder()
+						.name("Baris")
+						.surname("Demirci")
+						.email("Baris.Demirci@example.com")
+						.password(PasswordHasher.passwordHash("B12345"))
+						.gender(EGender.MAN)
+						.companyId("Example Company ID")
+						.role(ERole.MANAGER)
+						.phoneNumber("05554443322")
+						.address("Istanbul/Turkey")
+						.pictureUrl("https://images2.fanpop.com/images/photos/7900000/JOHN-DOE-john-doe-7969094-2087-2560.jpg")
+						.build();
+				managerRepository.save(manager);
+				System.out.println("Mock Manager Created: " + manager);
+			}
 		};
 	}
 }
