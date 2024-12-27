@@ -73,4 +73,8 @@ public class ManagerService {
 		manager.setPictureUrl(photoUrl);
 		return managerRepository.save(manager);
 	}
+	
+	public Manager findById(String userId) {
+		return managerRepository.findById(userId).get();
+	}
 }

@@ -49,4 +49,8 @@ public class EmployeeService {
 		String companyId = manager.getCompanyId();
 		return employeeRepository.findAllByCompanyId(companyId);
 	}
+	
+	public Employee findById(String s) {
+		return employeeRepository.findById(s).get();
+	}
 }
