@@ -36,6 +36,8 @@ dependencies {
     implementation 'org.bouncycastle:bcprov-jdk18on:1.79'
 
 
+
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
 
