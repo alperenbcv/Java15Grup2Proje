@@ -15,7 +15,6 @@ public interface LeaveMapper {
 	
 	
 	@Mapping(target = "leaveState", expression = "java(org.example.java15grup2proje.entity.enums.EState.PENDING)")
-	
-	Leave fromLeaveRequestDto(final LeaveRequestDto dto);
+	Leave fromLeaveRequestDto(final LeaveRequestDto dto, String personnelId, String managerId);
 	
 }

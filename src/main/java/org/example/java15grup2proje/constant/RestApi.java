@@ -10,6 +10,7 @@ public class RestApi {
 	public static final String AUTH_MANAGER = ROOT + "/auth/manager";
 	public static final String AUTH_ADMIN = ROOT + "/auth/admin";
 	public static final String AUTH_COMPANY = ROOT + "/auth/company";
+	public static final String LEAVE = ROOT + "/leave";
 	
 	public static final String REGISTER = "/register";
 	public static final String LOGIN = "/login";
@@ -21,4 +22,7 @@ public class RestApi {
 	public static final String EDIT_PHOTO = "/edit-photo";
 	public static final String GET_MY_PERSONNEL = "/get-my-personnel";
 	public static final String EDIT_MY_PERSONNEL = "/edit-my-personnel";
+	
+	public static final String ADD_LEAVE = "/add-leave";
+	public static final String GET_PENDING_LEAVES = "/get-pending-leaves";
 }

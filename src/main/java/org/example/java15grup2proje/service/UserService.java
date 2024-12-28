@@ -52,9 +52,18 @@ public class UserService {
 	}
 	
 	public User tokenToUser(String token){
+		String userId = tokenToUserId(token);
+		return userIdToUser(userId);
+	}
+	
+	public String tokenToUserId(String token){
 		Optional<String> optUserId = jwtManager.validateToken(token);
 		if(optUserId.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION);
-		Optional<User> optUser = userRepository.findById(optUserId.get());
+		return optUserId.get();
+	}
+	
+	public User userIdToUser(String userId){
+		Optional<User> optUser = userRepository.findById(userId);
 		if (optUser.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
 		return optUser.get();
 	}

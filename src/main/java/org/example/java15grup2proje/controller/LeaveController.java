@@ -4,12 +4,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.LeaveRequestDto;
 import org.example.java15grup2proje.dto.response.BaseResponse;
+import org.example.java15grup2proje.entity.Leave;
 import org.example.java15grup2proje.service.LeaveService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 import static org.example.java15grup2proje.constant.RestApi.*;
 @RestController
 @RequiredArgsConstructor
@@ -26,4 +27,15 @@ public class LeaveController {
 		                                     .success(true).build());
 	
 	}
+	
+	@GetMapping(GET_PENDING_LEAVES)
+	public ResponseEntity<BaseResponse<List<Leave>>> getPendingLeaves(String token){
+		return ResponseEntity.ok(BaseResponse.<List<Leave>>builder()
+		                                     .code(200)
+		                                     .data(leaveService.getPendingLeaves(token))
+		                                     .message("Leave add successful.")
+		                                     .success(true).build());
+		
+	}
+	
 }
