@@ -20,8 +20,8 @@ public class Leave extends BaseEntity {
 	Long startDate;
 	Long endDate;
 	String description;
-	Long personnelId;
-	Long responseManagerId;
+	String personnelId;
+	String managerId;
 	@Enumerated(EnumType.STRING)
 	ELeaveType leaveType;
 	@Enumerated(EnumType.STRING)

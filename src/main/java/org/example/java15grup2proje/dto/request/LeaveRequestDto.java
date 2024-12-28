@@ -6,7 +6,7 @@ import org.example.java15grup2proje.entity.enums.ELeaveType;
 import org.example.java15grup2proje.entity.enums.EState;
 
 public record LeaveRequestDto(
-	Long personnelId,
+	String token,
 	Long startDate,
 	Long endDate,
 	ELeaveType leaveType,
