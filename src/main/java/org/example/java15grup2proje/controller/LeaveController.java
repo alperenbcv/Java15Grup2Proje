@@ -3,7 +3,9 @@ package org.example.java15grup2proje.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.LeaveRequestDto;
+import org.example.java15grup2proje.dto.request.ManageLeaveDto;
 import org.example.java15grup2proje.dto.response.BaseResponse;
+import org.example.java15grup2proje.dto.response.LeaveResponseDto;
 import org.example.java15grup2proje.entity.Leave;
 import org.example.java15grup2proje.service.LeaveService;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +31,21 @@ public class LeaveController {
 	}
 	
 	@GetMapping(GET_PENDING_LEAVES)
-	public ResponseEntity<BaseResponse<List<Leave>>> getPendingLeaves(String token){
-		return ResponseEntity.ok(BaseResponse.<List<Leave>>builder()
+	public ResponseEntity<BaseResponse<List<LeaveResponseDto>>> getPendingLeaves(String token){
+		return ResponseEntity.ok(BaseResponse.<List<LeaveResponseDto>>builder()
 		                                     .code(200)
 		                                     .data(leaveService.getPendingLeaves(token))
+		                                     .message("Leave add successful.")
+		                                     .success(true).build());
+		
+	}
+	
+	@PostMapping(MANAGE_LEAVE)
+	public ResponseEntity<BaseResponse<Boolean>> getPendingLeaves(@RequestBody @Valid ManageLeaveDto dto){
+		leaveService.manageLeave(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+		                                     .code(200)
+		                                     .data(true)
 		                                     .message("Leave add successful.")
 		                                     .success(true).build());
 		

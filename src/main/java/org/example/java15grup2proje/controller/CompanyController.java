@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.AdminRegisterRequestDto;
 import org.example.java15grup2proje.dto.request.CompanyRegisterRequestDto;
+import org.example.java15grup2proje.dto.request.ManageCompanyRegisterStateRequestDto;
 import org.example.java15grup2proje.dto.response.BaseResponse;
 import org.example.java15grup2proje.entity.Company;
 import org.example.java15grup2proje.service.CompanyService;
@@ -33,4 +34,20 @@ public class CompanyController {
 		                                     .data(companyService.getAllCompanyNames()).message("All company names brought").success(true).build());
 		
 	}
+	
+	@GetMapping(GET_ALL_COMPANIES)
+	public ResponseEntity<BaseResponse<List<Company>>> getAllCompanies(){
+		return ResponseEntity.ok(BaseResponse.<List<Company>>builder().code(200)
+		                                     .data(companyService.getAllCompanies()).message("All company names brought").success(true).build());
+		
+	}
+	
+	@PostMapping(MANAGE_COMPANY_REGISTER_STATE)
+	public ResponseEntity<BaseResponse<Boolean>> manageCompanyRegisterState(@RequestBody @Valid ManageCompanyRegisterStateRequestDto dto){
+		companyService.manageCompanyRegisterState(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder().code(200)
+		                                     .data(true).message("All company names brought").success(true).build());
+		
+	}
+	
 }

@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "tblmembershipplan")
 public class MembershipPlan extends BaseEntity{
-	Long companyId;
+	String companyId;
 	Long startDate;
 	Long endDate;
 }

@@ -1,6 +1,7 @@
 package org.example.java15grup2proje.mapper;
 
 import org.example.java15grup2proje.dto.request.LeaveRequestDto;
+import org.example.java15grup2proje.dto.response.LeaveResponseDto;
 import org.example.java15grup2proje.entity.Leave;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,4 +18,6 @@ public interface LeaveMapper {
 	@Mapping(target = "leaveState", expression = "java(org.example.java15grup2proje.entity.enums.EState.PENDING)")
 	Leave fromLeaveRequestDto(final LeaveRequestDto dto, String personnelId, String managerId);
 	
+	@Mapping(target = "leaveId", expression = "java(leave.getId())")
+	LeaveResponseDto fromLeavetoResponse(final Leave leave);
 }

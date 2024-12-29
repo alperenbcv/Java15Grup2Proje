@@ -15,6 +15,7 @@ import org.example.java15grup2proje.mapper.UserMapper;
 import org.example.java15grup2proje.repository.UserRepository;
 import org.example.java15grup2proje.utility.JwtManager;
 import org.example.java15grup2proje.utility.PasswordHasher;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -86,8 +87,11 @@ public class UserService {
 	}
 	
 	public ProfileResponseDto editProfile(@Valid EditProfileDto dto) {
-		ProfileResponseDto profile = tokenToProfile(dto.token());
-		UserMapper.INSTANCE.fromEditToProfile(dto, profile);
+		User user = tokenToUser(dto.token());
+		UserMapper userMapper = UserMapper.INSTANCE;
+		userMapper.fromEditToUser(dto, user);
+		userRepository.save(user);
+		ProfileResponseDto profile = userToProfile(user);
 		return profile;
 	}
 	
