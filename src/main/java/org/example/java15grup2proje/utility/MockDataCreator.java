@@ -1,12 +1,15 @@
 package org.example.java15grup2proje.utility;
 
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.controller.AdminController;
+import org.example.java15grup2proje.entity.Admin;
 import org.example.java15grup2proje.entity.Company;
 import org.example.java15grup2proje.entity.Employee;
 import org.example.java15grup2proje.entity.Manager;
 import org.example.java15grup2proje.entity.enums.EDepartment;
 import org.example.java15grup2proje.entity.enums.EGender;
 import org.example.java15grup2proje.entity.enums.ERole;
+import org.example.java15grup2proje.repository.AdminRepository;
 import org.example.java15grup2proje.repository.CompanyRepository;
 import org.example.java15grup2proje.repository.EmployeeRepository;
 import org.example.java15grup2proje.repository.ManagerRepository;
@@ -22,10 +25,19 @@ public class MockDataCreator {
 	private final CompanyRepository companyRepository;
 	private final ManagerRepository managerRepository;
 	private final EmployeeRepository employeeRepository;
-	
+	private final AdminRepository adminRepository;
 	@Bean
 	CommandLineRunner createMockData() {
 		return args -> {
+			if (adminRepository.count() == 0){
+				Admin admin = Admin.builder()
+						.email("admin@mail.com")
+						.password(PasswordHasher.passwordHash("Qweqwe123!"))
+						.role(ERole.ADMIN)
+						.isSuperAdmin(true)
+				                   .build();
+				adminRepository.save(admin);
+			}
 			// Mock Company Data
 			if (companyRepository.count() == 0) {
 				Company company = Company.builder()
@@ -70,6 +82,7 @@ public class MockDataCreator {
 				                            .email("jane.smith@example.com")
 				                            .password(PasswordHasher.passwordHash("Alperen1+"))
 				                            .gender(EGender.WOMAN)
+						.phoneNumber("09998887766")
 						.companyId("Example Company ID")
 				                            .managerId((manager == null)?"0":manager.getId())
 				                            .role(ERole.EMPLOYEE)

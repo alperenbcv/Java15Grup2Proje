@@ -4,12 +4,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
-import org.example.java15grup2proje.dto.request.RegisterRequestDto;
 import org.example.java15grup2proje.dto.request.TokenRefreshRequest;
 import org.example.java15grup2proje.dto.response.BaseResponse;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
 import org.example.java15grup2proje.dto.response.TokenRefreshResponse;
-import org.example.java15grup2proje.entity.Manager;
 import org.example.java15grup2proje.entity.RefreshToken;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
@@ -20,11 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static org.example.java15grup2proje.constant.RestApi.*;
-import static org.example.java15grup2proje.constant.RestApi.REGISTER;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(AUTH)
+@RequestMapping(USER)
 @CrossOrigin("*")
 public class UserController {
 	private final RefreshTokenService refreshTokenService;

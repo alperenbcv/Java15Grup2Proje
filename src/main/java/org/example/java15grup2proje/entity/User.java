@@ -6,8 +6,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.java15grup2proje.entity.enums.EDepartment;
 import org.example.java15grup2proje.entity.enums.EGender;
-import org.example.java15grup2proje.entity.enums.ERole;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -16,12 +14,9 @@ import org.example.java15grup2proje.entity.enums.ERole;
 @Entity
 @Table(name = "tbluser")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User extends BaseEntity {
+public class User extends Auth {
 	String name;
 	String surname;
-	@Column(unique = true)
-	String email;
-	String password;
 	String phoneNumber;
 	String pictureUrl;
 	String address;
@@ -38,6 +33,4 @@ public class User extends BaseEntity {
 	private Long birthDate;
 	private boolean isOnLeave;
 	private String companyId;
-	@Enumerated(EnumType.STRING)
-	ERole role;
 }

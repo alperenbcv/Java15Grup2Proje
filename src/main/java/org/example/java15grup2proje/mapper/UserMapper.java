@@ -29,7 +29,10 @@ public interface UserMapper {
 	ProfileResponseDto fromManagerToProfile(Manager manager);
 	void fromEditToProfile(EditProfileDto sourceDto, @MappingTarget ProfileResponseDto targetDto);
 	
+	void fromEditToUser(EditProfileDto sourceDto, @MappingTarget User user);
+	
 	ProfileResponseDto fromEmployeeToProfile(Employee employee);
 	
 	ProfileResponseDto fromAdminToProfile(Admin admin);
+	
 }

@@ -12,11 +12,6 @@ import org.example.java15grup2proje.entity.enums.ERole;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "tbladmin")
-public class Admin extends BaseEntity{
+public class Admin extends Auth{
 	boolean isSuperAdmin;
-	@Column(unique = true)
-	String email;
-	String password;
-	@Enumerated(EnumType.STRING)
-	ERole role;
 }
