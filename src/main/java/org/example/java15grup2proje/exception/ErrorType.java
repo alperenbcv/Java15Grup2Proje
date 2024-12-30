@@ -15,7 +15,10 @@ public enum ErrorType {
 	NOT_FOUND_USER(3002, "could not find the given user's data", HttpStatus.BAD_REQUEST),
 	ROLE_EXCEPTION(3003,"role name is not registered in the system" , HttpStatus.BAD_REQUEST),
 	LEAVE_NOT_FOUND(5001, "could not find the leave with given id", HttpStatus.BAD_REQUEST),
-	NO_PERMISSION(1002, "you do not have the permission to execute this method", HttpStatus.BAD_REQUEST);
+	NO_PERMISSION(1002, "you do not have the permission to execute this method", HttpStatus.BAD_REQUEST),
+	POSSESSION_NOT_FOUND(6001, "could not find the possession with the given id" , HttpStatus.BAD_REQUEST),
+	COMMENT_NOT_FOUND(7001, "could not find the comment of the given manager" , HttpStatus.BAD_REQUEST),
+	EXISTING_COMMENT(7002, "you already have a submitted comment in the system, you have to either delete or edit it", HttpStatus.BAD_REQUEST);
 	
 	int code;
 	String message;

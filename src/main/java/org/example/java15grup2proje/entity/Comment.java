@@ -13,9 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "tblcomment")
 public class Comment extends BaseEntity{
-	Long managerId;
+	String managerId;
+	String companyId;
 	String comment;
-	Integer rating;
-	private String companyMail;
-	
 }

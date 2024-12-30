@@ -18,7 +18,7 @@ public class Company extends BaseEntity {
 	String companyAddress;
 	Long establishedDate;
 	String industry;
-	Long employeeNumber;
+	Long employeeCount;
 	boolean isPaidMember;
 	@Column(unique = true)
 	String companyMail;

@@ -16,8 +16,10 @@ import org.example.java15grup2proje.entity.enums.EState;
 @Entity
 @Table(name = "tblexpense")
 public class Expense extends BaseEntity {
-	Long personnelId;
+	String personnelId;
+	String managerId;
 	Long expenseDate;
+	String title;
 	String description;
 	@Enumerated(EnumType.STRING)
 	EState expenseState;

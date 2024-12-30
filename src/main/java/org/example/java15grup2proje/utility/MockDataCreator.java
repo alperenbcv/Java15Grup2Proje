@@ -45,7 +45,7 @@ public class MockDataCreator {
 				                         .companyAddress("123 Main Street")
 				                         .companyMail("contact@example.com")
 				                         .industry("Technology")
-				                         .employeeNumber(100L)
+				                         .employeeCount(100L)
 				                         .isPaidMember(true)
 				                         .build();
 				companyRepository.save(company);
