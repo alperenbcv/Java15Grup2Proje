@@ -13,6 +13,9 @@ public class RestApi {
 	public static final String AUTH_ADMIN = ROOT + "/auth/admin";
 	public static final String AUTH_COMPANY = ROOT + "/auth/company";
 	public static final String LEAVE = ROOT + "/leave";
+	public static final String POSSESSION = ROOT + "/possession";
+	public static final String EXPENSE = ROOT + "/expense";
+	public static final String COMMENT = ROOT + "/comment";
 	
 	public static final String REGISTER = "/register";
 	public static final String LOGIN = "/login";
@@ -31,4 +34,16 @@ public class RestApi {
 	public static final String GET_ALL_COMPANY_NAMES = "/company-list";
 	public static final String GET_ALL_COMPANIES = "/get-all-companies";
 	public static final String MANAGE_COMPANY_REGISTER_STATE = "/manage-company-register-state";
+	
+	public static final String MANAGE_POSSESSION = "/manage-possession";
+	public static final String GET_MY_POSSESSIONS = "/get-my-possessions";
+	
+	public static final String MANAGE_EXPENSE = "/manage-expense";
+	public static final String GET_MY_EXPENSES = "/get-my-expenses";
+	
+	public static final String ADD_COMMENT = "/add-comment";
+	public static final String DELETE_COMMENT = "/delete-comment";
+	public static final String EDIT_COMMENT =  "/edit-comment";
+	public static final String GET_COMMENT =  "/get-comment";
+	public static final String GET_ALL_COMMENTS =  "/get-all-comments";
 }
