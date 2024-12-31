@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface LeaveRepository extends JpaRepository<Leave, String> {
 	public List<Leave> findAllByManagerIdAndLeaveState(String managerId, EState leaveState);
+	
+	List<Leave> findAllByManagerId(String managerId);
 }

@@ -40,6 +40,16 @@ public class LeaveController {
 		
 	}
 	
+	@GetMapping(GET_LEAVES_BY_MANAGER)
+	public ResponseEntity<BaseResponse<List<LeaveResponseDto>>> getLeavesByManager(String token){
+		return ResponseEntity.ok(BaseResponse.<List<LeaveResponseDto>>builder()
+		                                     .code(200)
+		                                     .data(leaveService.getLeavesByManager(token))
+		                                     .message("Leave add successful.")
+		                                     .success(true).build());
+		
+	}
+	
 	@PostMapping(MANAGE_LEAVE)
 	public ResponseEntity<BaseResponse<Boolean>> getPendingLeaves(@RequestBody @Valid ManageLeaveDto dto){
 		leaveService.manageLeave(dto);

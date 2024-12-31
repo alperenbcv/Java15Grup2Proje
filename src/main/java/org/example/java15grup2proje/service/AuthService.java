@@ -24,6 +24,7 @@ public class AuthService {
 	private final ManagerService managerService;
 	private final EmployeeService employeeService;
 	private final AdminService adminService;
+	private final RefreshTokenService refreshTokenService;
 	
 	public ProfileResponseDto tokenToProfile(String token){
 		Auth auth = tokenToAuth(token);
@@ -75,7 +76,6 @@ public class AuthService {
 			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_MAIL_OR_PASSWORD);
 		}
 		String token = jwtManager.createToken(auth.getId(), auth.getRole().toString());
-		
 		return LoginResponseDto.builder().role(auth.getRole()).token(token).build();
 		
 	}
