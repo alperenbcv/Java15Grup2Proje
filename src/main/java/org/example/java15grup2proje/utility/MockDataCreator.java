@@ -2,17 +2,9 @@ package org.example.java15grup2proje.utility;
 
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.controller.AdminController;
-import org.example.java15grup2proje.entity.Admin;
-import org.example.java15grup2proje.entity.Company;
-import org.example.java15grup2proje.entity.Employee;
-import org.example.java15grup2proje.entity.Manager;
-import org.example.java15grup2proje.entity.enums.EDepartment;
-import org.example.java15grup2proje.entity.enums.EGender;
-import org.example.java15grup2proje.entity.enums.ERole;
-import org.example.java15grup2proje.repository.AdminRepository;
-import org.example.java15grup2proje.repository.CompanyRepository;
-import org.example.java15grup2proje.repository.EmployeeRepository;
-import org.example.java15grup2proje.repository.ManagerRepository;
+import org.example.java15grup2proje.entity.*;
+import org.example.java15grup2proje.entity.enums.*;
+import org.example.java15grup2proje.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +18,7 @@ public class MockDataCreator {
 	private final ManagerRepository managerRepository;
 	private final EmployeeRepository employeeRepository;
 	private final AdminRepository adminRepository;
+	private final LeaveRepository leaveRepository;
 	@Bean
 	CommandLineRunner createMockData() {
 		return args -> {
@@ -73,7 +66,20 @@ public class MockDataCreator {
 				manager = managerRepository.save(manager);
 				System.out.println("Mock Manager Created: " + manager);
 			}
-			
+			// Mock Leave Data
+			if(leaveRepository.count() == 0){
+				for (int i = 0; i < 20; i++) {
+					Leave leave = Leave.builder()
+							.managerId(manager.getId())
+							.description("fdslkf" + i + "fdsa" + Math.pow(i, 20))
+							.leaveState(EState.values()[i % 3])
+							.leaveType(ELeaveType.values()[i % ELeaveType.values().length])
+							.endDate(1730935553000L + i*1000000000)
+							.startDate(1730025553000L + i*1000000000 )
+							.build();
+					leaveRepository.save(leave);
+				}
+			}
 			// Mock Employee Data
 			if (employeeRepository.count() == 0) {
 				Employee employee = Employee.builder()

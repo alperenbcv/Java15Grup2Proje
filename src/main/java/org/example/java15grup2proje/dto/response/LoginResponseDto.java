@@ -10,5 +10,6 @@ import org.example.java15grup2proje.entity.enums.ERole;
 @Builder
 public class LoginResponseDto {
 	String token;
+	String refreshToken;
 	ERole role;
 }

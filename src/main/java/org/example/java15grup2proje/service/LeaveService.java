@@ -60,4 +60,13 @@ public class LeaveService {
 		leave.setLeaveState(dto.state());
 		leaveRepository.save(leave);
 	}
+	
+	public List<LeaveResponseDto> getLeavesByManager(String token) {
+		String managerId = userService.tokenToUserId(token);
+		List<Leave> pendingLeaves = leaveRepository.findAllByManagerId(managerId);
+		LeaveMapper leaveMapper = LeaveMapper.INSTANCE;
+		List<LeaveResponseDto> leaveResponseList =
+				pendingLeaves.stream().map(leave -> leaveMapper.fromLeavetoResponse(leave)).toList();
+		return leaveResponseList;
+	}
 }

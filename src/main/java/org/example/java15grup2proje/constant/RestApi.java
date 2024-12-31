@@ -30,6 +30,7 @@ public class RestApi {
 	public static final String ADD_LEAVE = "/add-leave";
 	public static final String GET_PENDING_LEAVES = "/get-pending-leaves";
 	public static final String MANAGE_LEAVE = "/manage-leave";
+	public static final String GET_LEAVES_BY_MANAGER = "/get-leaves-by-manager";
 	
 	public static final String GET_ALL_COMPANY_NAMES = "/company-list";
 	public static final String GET_ALL_COMPANIES = "/get-all-companies";

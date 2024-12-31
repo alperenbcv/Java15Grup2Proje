@@ -19,5 +19,6 @@ public interface LeaveMapper {
 	Leave fromLeaveRequestDto(final LeaveRequestDto dto, String personnelId, String managerId);
 	
 	@Mapping(target = "leaveId", expression = "java(leave.getId())")
+	@Mapping(target = "state", source = "leaveState")
 	LeaveResponseDto fromLeavetoResponse(final Leave leave);
 }
