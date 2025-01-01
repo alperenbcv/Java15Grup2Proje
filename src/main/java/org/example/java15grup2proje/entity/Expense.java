@@ -18,7 +18,8 @@ import org.example.java15grup2proje.entity.enums.EState;
 public class Expense extends BaseEntity {
 	String personnelId;
 	String managerId;
-	Long expenseDate;
+	@Builder.Default
+	Long expenseDate = System.currentTimeMillis();
 	String title;
 	String description;
 	@Enumerated(EnumType.STRING)

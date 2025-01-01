@@ -41,6 +41,8 @@ public class RestApi {
 	
 	public static final String MANAGE_EXPENSE = "/manage-expense";
 	public static final String GET_MY_EXPENSES = "/get-my-expenses";
+	public static final String GET_MY_EMPLOYEES_EXPENSES = "/get-my-employees-expenses";
+	public static final String ADD_EXPENSE = "/add-expense";
 	
 	public static final String ADD_COMMENT = "/add-comment";
 	public static final String DELETE_COMMENT = "/delete-comment";

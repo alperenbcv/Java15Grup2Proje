@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ExpenseRepository extends JpaRepository<Expense, String> {
 	List<Expense> findAllByPersonnelId(String id);
+	
+	List<Expense> findAllByManagerId(String id);
 }
