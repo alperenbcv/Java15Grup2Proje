@@ -63,4 +63,8 @@ public class CompanyService {
 		company.setRegisterState(dto.state());
 		companyRepository.save(company);
 	}
+	
+	public Optional<Company> findById(String companyId) {
+		return companyRepository.findById(companyId);
+	}
 }

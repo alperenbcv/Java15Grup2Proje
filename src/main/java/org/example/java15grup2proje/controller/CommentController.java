@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.UpdateCommentDto;
 import org.example.java15grup2proje.dto.response.BaseResponse;
+import org.example.java15grup2proje.dto.response.CommentResponseDto;
 import org.example.java15grup2proje.entity.Comment;
 import org.example.java15grup2proje.service.CommentService;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +31,12 @@ public class CommentController {
 	}
 	
 	@PostMapping(EDIT_COMMENT)
-	public ResponseEntity<BaseResponse<Boolean>> editComment(@RequestBody @Valid UpdateCommentDto dto){
-		commentService.editComment(dto);
-		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+	public ResponseEntity<BaseResponse<Comment>> editComment(@RequestBody @Valid UpdateCommentDto dto){
+		return ResponseEntity.ok(BaseResponse.<Comment>builder()
 				                         .success(true)
 				                         .code(200)
 				                         .message("")
-				                         .data(true)
+				                         .data(commentService.editComment(dto))
 		                                     .build());
 	}
 	@PostMapping(ADD_COMMENT)
@@ -61,8 +61,8 @@ public class CommentController {
 	}
 	
 	@GetMapping(GET_ALL_COMMENTS)
-	public ResponseEntity<BaseResponse<List<Comment>>> getAllComments(){
-		return ResponseEntity.ok(BaseResponse.<List<Comment>>builder()
+	public ResponseEntity<BaseResponse<List<CommentResponseDto>>> getAllComments(){
+		return ResponseEntity.ok(BaseResponse.<List<CommentResponseDto>>builder()
 		                                     .data(commentService.getAllComments())
 		                                     .message("comment listesi başarıyla getirildi")
 		                                     .code(200)

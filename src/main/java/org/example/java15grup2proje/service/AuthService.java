@@ -34,7 +34,9 @@ public class AuthService {
 	public ProfileResponseDto userToProfile(Auth auth){
 		switch (auth.getRole()){
 			case MANAGER -> {
-				Manager manager = managerService.findById(auth.getId());
+				Optional<Manager> optManager = managerService.findById(auth.getId());
+				if (optManager.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+				Manager manager = optManager.get();
 				return UserMapper.INSTANCE.fromManagerToProfile(manager);
 			}
 			case EMPLOYEE -> {

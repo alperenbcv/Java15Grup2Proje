@@ -74,7 +74,7 @@ public class ManagerService {
 		return managerRepository.save(manager);
 	}
 	
-	public Manager findById(String userId) {
-		return managerRepository.findById(userId).get();
+	public Optional<Manager> findById(String userId) {
+		return managerRepository.findById(userId);
 	}
 }
