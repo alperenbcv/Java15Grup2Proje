@@ -16,6 +16,7 @@ public class RestApi {
 	public static final String POSSESSION = ROOT + "/possession";
 	public static final String EXPENSE = ROOT + "/expense";
 	public static final String COMMENT = ROOT + "/comment";
+	public static final String MEDIA_FILE = ROOT + "/media-file";
 	
 	public static final String REGISTER = "/register";
 	public static final String LOGIN = "/login";
@@ -49,4 +50,6 @@ public class RestApi {
 	public static final String EDIT_COMMENT =  "/edit-comment";
 	public static final String GET_COMMENT =  "/get-comment";
 	public static final String GET_ALL_COMMENTS =  "/get-all-comments";
+	
+	public static final String UPLOAD_MEDIA = "/upload-media";
 }

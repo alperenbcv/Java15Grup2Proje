@@ -64,9 +64,10 @@ public class MockDataCreator {
 				                         .managerId(manager.getId()).companyId(manager.getCompanyId()).build();
 				commentRepository.save(comment);
 				
-				Employee employee = Employee.builder()
+				Employee employee2 = Employee.builder()
 				                            .name("Jane")
 				                            .surname("Smith")
+						.wage(50000L)
 				                            .email("jane.smith@example.com")
 				                            .password(PasswordHasher.passwordHash("Alperen1+"))
 				                            .gender(EGender.WOMAN)
@@ -76,11 +77,11 @@ public class MockDataCreator {
 				                            .role(ERole.EMPLOYEE)
 						.pictureUrl("https://townsquare.media/site/180/files/2018/02/Jane-Smith-Edited.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89")
 				                            .build();
-				employeeRepository.save(employee);
-				System.out.println("Mock Employee Created: " + employee);
+				employeeRepository.save(employee2);
+				System.out.println("Mock Employee Created: " + employee2);
 			
 
-				 employee = Employee.builder()
+				 Employee employee = Employee.builder()
 						.name("Burak")
 						.surname("BB")
 						.email("burak1@example.com")
@@ -232,7 +233,7 @@ public class MockDataCreator {
 						.expenseDate(System.currentTimeMillis())
 						.expenseState(EState.PENDING)
 						.managerId(manager.getId())
-						.personnelId(employee.getId())
+						.personnelId(employee2.getId())
 						.title("sandalye")
 						.description("basit ahşap bir sandalye satın alındı")
 				                         .build();
