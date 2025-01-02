@@ -18,7 +18,10 @@ public enum ErrorType {
 	NO_PERMISSION(1002, "you do not have the permission to execute this method", HttpStatus.BAD_REQUEST),
 	POSSESSION_NOT_FOUND(6001, "could not find the possession with the given id" , HttpStatus.BAD_REQUEST),
 	COMMENT_NOT_FOUND(7001, "could not find the comment of the given manager" , HttpStatus.BAD_REQUEST),
-	EXISTING_COMMENT(7002, "you already have a submitted comment in the system, you have to either delete or edit it", HttpStatus.BAD_REQUEST);
+	EXISTING_COMMENT(7002, "you already have a submitted comment in the system, you have to either delete or edit it", HttpStatus.BAD_REQUEST),
+	IMAGE_SIZE_ERROR(8001, "image too large", HttpStatus.BAD_REQUEST),
+	EXPENSE_NOT_FOUND(9001, "expense id is invalid", HttpStatus.BAD_REQUEST),
+	INVALID_FILE_TYPE(9002,"file type entered is invalid" , HttpStatus.BAD_REQUEST);
 	
 	int code;
 	String message;

@@ -2,12 +2,14 @@ package org.example.java15grup2proje.service;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.dto.request.AddExpenseRequestDto;
 import org.example.java15grup2proje.dto.request.ManageStateRequestDto;
 import org.example.java15grup2proje.dto.response.ExpenseManagerResponseDto;
 import org.example.java15grup2proje.entity.*;
 import org.example.java15grup2proje.entity.enums.ERole;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
+import org.example.java15grup2proje.mapper.ExpenseMapper;
 import org.example.java15grup2proje.repository.AuthRepository;
 import org.example.java15grup2proje.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
@@ -53,5 +55,21 @@ public class ExpenseService {
 					.employeeName(employeeName)
 					.expense(expense).build();
 		}).toList();
+	}
+	
+	public void addExpense(@Valid AddExpenseRequestDto dto) {
+		User user = userService.tokenToUser(dto.token());
+		if (user.getRole() != ERole.EMPLOYEE) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		Employee employee = (Employee) user;
+		Expense expense = ExpenseMapper.INSTANCE.dtoToExpense(dto, employee.getId(), employee.getManagerId());
+		expenseRepository.save(expense);
+	}
+	
+	public Optional<Expense> findById(String s) {
+		return expenseRepository.findById(s);
+	}
+	
+	public void save(Expense expense) {
+		expenseRepository.save(expense);
 	}
 }

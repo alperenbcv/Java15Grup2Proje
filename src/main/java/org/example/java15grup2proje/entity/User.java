@@ -17,6 +17,7 @@ import org.example.java15grup2proje.entity.enums.EGender;
 public class User extends Auth {
 	String name;
 	String surname;
+	Long wage;
 	String phoneNumber;
 	String pictureUrl;
 	String address;

@@ -2,6 +2,7 @@ package org.example.java15grup2proje.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.dto.request.AddExpenseRequestDto;
 import org.example.java15grup2proje.dto.request.ManageStateRequestDto;
 import org.example.java15grup2proje.dto.response.BaseResponse;
 import org.example.java15grup2proje.dto.response.ExpenseManagerResponseDto;
@@ -33,12 +34,12 @@ public class ExpenseController {
 	}
 	
 	@PostMapping(ADD_EXPENSE)
-	public ResponseEntity<BaseResponse<Boolean>> addExpense(@RequestBody @Valid ManageStateRequestDto dto){
-		expenseService.manageExpense(dto);
+	public ResponseEntity<BaseResponse<Boolean>> addExpense(@RequestBody @Valid AddExpenseRequestDto dto){
+		expenseService.addExpense(dto);
 		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
 		                                     .code(200)
 		                                     .data(true)
-		                                     .message("Expense managed")
+		                                     .message("Expense added")
 		                                     .success(true).build());
 		
 	}

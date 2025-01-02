@@ -32,3 +32,8 @@ java15grup2proje:
     issuer: ${java15grup2proje_jwt_issuer}
   refreshtoken:
     duration: ${java15grup2proje_refreshtoken_duration}
+
+cloudinary:
+  cloud_name: ${cloudinary_cloudname}
+  api_key: ${cloudinary_apikey}
+  api_secret: ${cloudinary_apisecret}

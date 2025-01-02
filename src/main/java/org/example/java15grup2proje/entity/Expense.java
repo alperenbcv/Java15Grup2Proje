@@ -22,6 +22,10 @@ public class Expense extends BaseEntity {
 	Long expenseDate = System.currentTimeMillis();
 	String title;
 	String description;
+	Long cost;
+	@Builder.Default
 	@Enumerated(EnumType.STRING)
-	EState expenseState;
+	EState expenseState = EState.PENDING;
+	String imageUrl;
+	String fileUrl;
 }
