@@ -19,6 +19,7 @@ import static org.example.java15grup2proje.constant.RestApi.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(EXPENSE)
+@CrossOrigin("*")
 public class ExpenseController {
 	private final ExpenseService expenseService;
 	

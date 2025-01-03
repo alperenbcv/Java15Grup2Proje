@@ -18,6 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(MEDIA_FILE)
+@CrossOrigin("*")
 public class MediaFileController {
 	private final MediaFileService mediaFileService;
 	private final CloudinaryService cloudinaryService;

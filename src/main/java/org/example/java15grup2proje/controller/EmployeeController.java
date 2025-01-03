@@ -20,6 +20,7 @@ import static org.example.java15grup2proje.constant.RestApi.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(AUTH_EMPLOYEE)
+@CrossOrigin("*")
 public class EmployeeController {
 	private final EmployeeService employeeService;
 	

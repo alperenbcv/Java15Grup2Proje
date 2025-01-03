@@ -17,6 +17,7 @@ import static org.example.java15grup2proje.constant.RestApi.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(LEAVE)
+@CrossOrigin("*")
 public class LeaveController {
 	private final LeaveService leaveService;
 	@PostMapping(ADD_LEAVE)

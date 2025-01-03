@@ -17,6 +17,7 @@ import static org.example.java15grup2proje.constant.RestApi.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(COMMENT)
+@CrossOrigin("*")
 public class CommentController {
 	private final CommentService commentService;
 	

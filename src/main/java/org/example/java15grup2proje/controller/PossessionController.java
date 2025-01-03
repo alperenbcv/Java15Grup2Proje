@@ -15,6 +15,7 @@ import static  org.example.java15grup2proje.constant.RestApi.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(POSSESSION)
+@CrossOrigin("*")
 public class PossessionController {
 	private final PossessionService possessionService;
 	
