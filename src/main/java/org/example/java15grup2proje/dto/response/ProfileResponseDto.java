@@ -16,7 +16,6 @@ public class ProfileResponseDto {
 	String name;
 	String surname;
 	String email;
-	String password;
 	String phoneNumber;
 	String pictureUrl;
 	String address;

@@ -89,4 +89,8 @@ public class CommentService {
 	).filter(Objects::nonNull).toList();
 		return commentResponseList;
 	}
+	
+	public Optional<Comment> findById(String commentId) {
+		return commentRepository.findById(commentId);
+	}
 }

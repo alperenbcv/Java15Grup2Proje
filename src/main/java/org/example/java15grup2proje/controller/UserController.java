@@ -83,4 +83,12 @@ public class UserController {
 				                                                                                         ".").success(true).build());
 	}
 	
+	@GetMapping(GET_MANAGER_BY_COMMENT)
+	public ResponseEntity<BaseResponse<ProfileResponseDto>> getManagerByComment(String commentId){
+		
+		ProfileResponseDto profile = userService.getManagerByComment(commentId);
+		return ResponseEntity.ok(BaseResponse.<ProfileResponseDto>builder().code(200).data(profile).message("Manager register " +
+				                                                                                                    "successful" +
+				                                                                                                    ".").success(true).build());
+	}
 }

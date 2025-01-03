@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.ManageCompanyRegisterStateRequestDto;
 import org.example.java15grup2proje.entity.Auth;
+import org.example.java15grup2proje.entity.Comment;
 import org.example.java15grup2proje.entity.enums.ERole;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
@@ -23,11 +24,14 @@ import java.util.Optional;
 public class CompanyService {
 	private final CompanyRepository companyRepository;
 	private final AuthService authService;
+	private final CommentService commentService;
 	
 	@Autowired
-	public CompanyService(CompanyRepository companyRepository,@Lazy AuthService authService) {
+	public CompanyService(@Lazy CommentService commentService, CompanyRepository companyRepository,
+	                      @Lazy AuthService authService) {
 		this.companyRepository = companyRepository;
 		this.authService = authService;
+		this.commentService = commentService;
 	}
 	
 	public void companyRegister(@Valid CompanyRegisterRequestDto dto){
@@ -66,5 +70,14 @@ public class CompanyService {
 	
 	public Optional<Company> findById(String companyId) {
 		return companyRepository.findById(companyId);
+	}
+	
+	public Company getCompanyByComment(String commentId) {
+		Optional<Comment> optComment = commentService.findById(commentId);
+		if (optComment.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.COMMENT_NOT_FOUND);
+		String companyId = optComment.get().getCompanyId();
+		Optional<Company> optCompany = companyRepository.findById(companyId);
+		if (optCompany.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.COMPANY_NOT_FOUND);
+		return optCompany.get();
 	}
 }
