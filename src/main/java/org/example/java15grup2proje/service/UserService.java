@@ -5,29 +5,39 @@ import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
-import org.example.java15grup2proje.entity.Admin;
-import org.example.java15grup2proje.entity.Employee;
-import org.example.java15grup2proje.entity.Manager;
-import org.example.java15grup2proje.entity.User;
+import org.example.java15grup2proje.entity.*;
+import org.example.java15grup2proje.entity.enums.ERole;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.mapper.UserMapper;
 import org.example.java15grup2proje.repository.UserRepository;
 import org.example.java15grup2proje.utility.JwtManager;
 import org.example.java15grup2proje.utility.PasswordHasher;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 	private final UserRepository userRepository;
 	private final JwtManager jwtManager;
 	private final ManagerService managerService;
 	private final EmployeeService employeeService;
 	private final AdminService adminService;
+	private final CommentService commentService;
+	
+	public UserService(UserRepository userRepository, JwtManager jwtManager,
+	                   ManagerService managerService, EmployeeService employeeService,
+	                   AdminService adminService, @Lazy CommentService commentService) {
+		this.userRepository = userRepository;
+		this.jwtManager = jwtManager;
+		this.managerService = managerService;
+		this.employeeService = employeeService;
+		this.adminService = adminService;
+		this.commentService = commentService;
+	}
 	
 	public ProfileResponseDto tokenToProfile(String token){
 		User user = tokenToUser(token);
@@ -102,5 +112,14 @@ public class UserService {
 		user.setPictureUrl(photoUrl);
 		user = userRepository.save(user);
 		return userToProfile(user);
+	}
+	
+	public ProfileResponseDto getManagerByComment(String commentId) {
+		Optional<Comment> optComment = commentService.findById(commentId);
+		if (optComment.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.COMMENT_NOT_FOUND);
+		String managerId = optComment.get().getManagerId();
+		ProfileResponseDto profile = userToProfile(userIdToUser(managerId));
+		if (profile.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		return profile;
 	}
 }

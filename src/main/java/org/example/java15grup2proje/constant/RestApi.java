@@ -27,6 +27,7 @@ public class RestApi {
 	public static final String EDIT_PHOTO = "/edit-photo";
 	public static final String GET_MY_PERSONNEL = "/get-my-personnel";
 	public static final String EDIT_MY_PERSONNEL = "/edit-my-personnel";
+	public static final String GET_MANAGER_BY_COMMENT = "/get-manager-by-comment";
 	
 	public static final String ADD_LEAVE = "/add-leave";
 	public static final String GET_PENDING_LEAVES = "/get-pending-leaves";
@@ -36,6 +37,7 @@ public class RestApi {
 	public static final String GET_ALL_COMPANY_NAMES = "/company-list";
 	public static final String GET_ALL_COMPANIES = "/get-all-companies";
 	public static final String MANAGE_COMPANY_REGISTER_STATE = "/manage-company-register-state";
+	public static final String GET_COMPANY_BY_COMMENT = "/get-company-by-comment";
 	
 	public static final String MANAGE_POSSESSION = "/manage-possession";
 	public static final String GET_MY_POSSESSIONS = "/get-my-possessions";

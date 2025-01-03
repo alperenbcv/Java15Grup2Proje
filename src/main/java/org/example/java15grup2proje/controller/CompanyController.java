@@ -50,4 +50,11 @@ public class CompanyController {
 		
 	}
 	
+	@GetMapping(GET_COMPANY_BY_COMMENT)
+	public ResponseEntity<BaseResponse<Company>> getCompanyByComment(String commentId){
+		Company company = companyService.getCompanyByComment(commentId);
+		return ResponseEntity.ok(BaseResponse.<Company>builder().code(200)
+		                                     .data(company).message("All company names brought").success(true).build());
+		
+	}
 }
