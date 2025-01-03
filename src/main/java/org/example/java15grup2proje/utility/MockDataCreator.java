@@ -41,10 +41,17 @@ public class MockDataCreator {
 			// Mock Employee Data
 			if (employeeRepository.count() == 0) {
 				
-				Company company = Company.builder().companyName("Example Company").companyAddress("123 Main Street")
-				                         .companyMail("contact@example.com").industry("Technology").employeeCount(100L)
-				                         .companyLogoUrl("https://static.vecteezy.com/system/resources/previews/008/214/517/non_2x/abstract-geometric-logo-or-infinity-line-logo-for-your-company-free-vector.jpg")
-				                         .isPaidMember(true).build();
+				Company company = Company.builder()
+				                         .companyName("Ergun Holding")
+				                         .companyAddress("Kagithane/ Istanbul")
+				                         .companyMail("company@ergunler.com")
+				                         .industry("Informatics")
+				                         .employeeCount(4L)
+				                         .companyLogoUrl("https://mir-s3-cdn-cf.behance.net/project_modules/1400/224d1c165480227.6408444fca796.jpg")
+				                         .isPaidMember(true)
+						.companyWebSite("https://www.ergunholding.com/")
+						.establishedDate(1483436272000L)
+				                         .build();
 				company = companyRepository.save(company);
 				System.out.println("Mock Company Created: " + company);
 				
