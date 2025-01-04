@@ -1,5 +1,7 @@
 package org.example.java15grup2proje.mapper;
 
+import jakarta.validation.Valid;
+import org.example.java15grup2proje.dto.request.AddEmployeeRequestDto;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
 import org.example.java15grup2proje.entity.Admin;
@@ -35,4 +37,6 @@ public interface UserMapper {
 	
 	ProfileResponseDto fromAdminToProfile(Admin admin);
 	
+	@Mapping(target = "password", expression = "java(org.example.java15grup2proje.utility.PasswordHasher.passwordHash(dto.password()))")
+	Employee fromAddEmployeeToEmployee(@Valid AddEmployeeRequestDto dto, String managerId);
 }

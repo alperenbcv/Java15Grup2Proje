@@ -256,7 +256,61 @@ public class MockDataCreator {
 					                   .build();
 					leaveRepository.save(leave);
 				}
+				String[] websites = new String[]{
+				"https://www.apple.com",
+						"https://www.google.com",
+						"https://www.microsoft.com",
+						"https://www.amazon.com",
+						"https://www.ibm.com",
+						"https://www.nike.com",
+						"https://www.tesla.com",
+						"https://www.coca-cola.com",
+						"https://www.facebook.com",
+						"https://www.adidas.com"};
+				String[] companies = new String[]{"Apple", "Google", "Microsoft", "Amazon", "Tesla", "Facebook",
+						"Netflix", "Samsung", "Toyota", "Sony"};
+				String[] industries = {"Technology", "Healthcare", "Finance", "Automotive", "Entertainment", "Retail"
+						, "Energy", "Telecommunications", "Manufacturing", "Real Estate"};
+				
+				for(int i = 0; i < 10; i++){
+					Company company1 = Company.builder()
+							.establishedDate(473675087000L + (i*4243243432L))
+							.companyWebSite(websites[i])
+							.companyLogoUrl("https://images.freecreatives.com/wp-content/uploads/2015/04/logo025.png")
+							.companyMail("company" + i + "@mail.com")
+							.companyAddress("Istanbul/ Turkiye")
+							.companyName(companies[i])
+							.employeeCount(1000L*i)
+							.industry(industries[i])
+					                          .build();
+					company1 = companyRepository.save(company1);
+					Manager manager1 = Manager.builder()
+							.name("Deniz" + i)
+							.email("deniz" + i + "@mail.com")
+							.companyId(company1.getId())
+							.role(ERole.MANAGER)
+							.birthDate(473678087000L + (i*7543465432L))
+							.gender(EGender.values()[i%2])
+							.title("MANAGER")
+							.address("Istanbul/ Turkey")
+							.department(EDepartment.values()[i % EDepartment.values().length])
+							.surname(i + "oğlu")
+							.phoneNumber( "0888777665" + i)
+							.pictureUrl("https://picsum.photos/100/100")
+							.build();
+					manager1 = managerRepository.save(manager1);
+					Comment comment1 = Comment.builder()
+							.comment("fs daklf dslkşafj dsşfj dlf dlkşjfdsfj şlajşaeljdfk jsk jdsşkf jşasj" + i)
+							.managerId(manager1.getId())
+							.companyId(company1.getId())
+							.build();
+					comment1 = commentRepository.save(comment1);
+				}
+				
+				
 			}
+			
+			
 			
 		};
 	}

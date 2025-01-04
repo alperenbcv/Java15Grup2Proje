@@ -2,6 +2,7 @@ package org.example.java15grup2proje.service;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.dto.request.AddEmployeeRequestDto;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,19 +29,29 @@ public class UserService {
 	private final EmployeeService employeeService;
 	private final AdminService adminService;
 	private final CommentService commentService;
+	private final AuthService authService;
 	
 	public UserService(UserRepository userRepository, JwtManager jwtManager,
 	                   ManagerService managerService, EmployeeService employeeService,
-	                   AdminService adminService, @Lazy CommentService commentService) {
+	                   AdminService adminService, @Lazy CommentService commentService,
+	@Lazy AuthService authService) {
 		this.userRepository = userRepository;
 		this.jwtManager = jwtManager;
 		this.managerService = managerService;
 		this.employeeService = employeeService;
 		this.adminService = adminService;
 		this.commentService = commentService;
+		this.authService = authService;
 	}
 	
 	public ProfileResponseDto tokenToProfile(String token){
+		Auth auth = authService.tokenToAuth(token);
+		if (auth.getRole() == ERole.ADMIN) {
+			ProfileResponseDto dto = new ProfileResponseDto();
+			dto.setRole(auth.getRole());
+			dto.setEmail(auth.getEmail());
+			return dto;
+		}
 		User user = tokenToUser(token);
 		return userToProfile(user);
 	}
@@ -121,5 +133,24 @@ public class UserService {
 		ProfileResponseDto profile = userToProfile(userIdToUser(managerId));
 		if (profile.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
 		return profile;
+	}
+	
+	public void save(User user) {
+		userRepository.save(user);
+	}
+	
+	public List<ProfileResponseDto> getMyEmployees(String token) {
+		User user = tokenToUser(token);
+		if (user.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		List<Employee> myEmployees = employeeService.findAllByManagerId(user.getId());
+		return myEmployees.stream().map(employee-> UserMapper.INSTANCE.fromEmployeeToProfile(employee)).toList();
+	}
+	
+	public void addEmployee(@Valid AddEmployeeRequestDto dto) {
+		User user = tokenToUser(dto.token());
+		if (user.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		if (!dto.password().equals(dto.repassword())) throw new Java15Grup2ProjeAppException(ErrorType.PASSWORD_ERROR);
+		Employee employee = UserMapper.INSTANCE.fromAddEmployeeToEmployee(dto, user.getId());
+		employeeService.save(employee);
 	}
 }

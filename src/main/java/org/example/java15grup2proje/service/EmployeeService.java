@@ -3,6 +3,7 @@ package org.example.java15grup2proje.service;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.entity.Manager;
+import org.example.java15grup2proje.entity.User;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
@@ -10,6 +11,7 @@ import org.example.java15grup2proje.dto.request.RegisterRequestDto;
 import org.example.java15grup2proje.entity.Employee;
 import org.example.java15grup2proje.entity.enums.ERole;
 import org.example.java15grup2proje.repository.EmployeeRepository;
+import org.example.java15grup2proje.repository.UserRepository;
 import org.example.java15grup2proje.utility.JwtManager;
 import org.example.java15grup2proje.utility.PasswordHasher;
 import org.example.java15grup2proje.mapper.EmployeeMapper;
@@ -24,6 +26,7 @@ public class EmployeeService {
 	private final JwtManager jwtManager;
 	private final EmployeeRepository employeeRepository;
 	private final ManagerService managerService;
+	private final UserRepository userRepository;
 	
 	public void employeeRegister(@Valid RegisterRequestDto dto){
 		Employee employee = EmployeeMapper.INSTANCE.fromRegisterRequestDto(dto);
@@ -52,5 +55,13 @@ public class EmployeeService {
 	
 	public Employee findById(String s) {
 		return employeeRepository.findById(s).get();
+	}
+	
+	public List<Employee> findAllByManagerId(String id) {
+		return employeeRepository.findAllByManagerId(id);
+	}
+	
+	public void save(Employee employee) {
+		employeeRepository.save(employee);
 	}
 }

@@ -29,6 +29,7 @@ public class ProfileResponseDto {
 	private boolean isOnLeave;
 	private String companyId;
 	ERole role;
+	Long wage;
 	
 	private String managerId;
 	

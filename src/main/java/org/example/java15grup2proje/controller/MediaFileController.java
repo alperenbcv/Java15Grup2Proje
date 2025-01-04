@@ -2,6 +2,7 @@ package org.example.java15grup2proje.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.UploadFileRequestDto;
+import org.example.java15grup2proje.dto.request.UploadProfilePicture;
 import org.example.java15grup2proje.dto.response.BaseResponse;
 import org.example.java15grup2proje.entity.MediaFile;
 import org.example.java15grup2proje.service.CloudinaryService;
@@ -25,7 +26,7 @@ public class MediaFileController {
 	
 	
 	@PostMapping(value = UPLOAD_MEDIA, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<BaseResponse<Boolean>> uploadPhotoByUrl(UploadFileRequestDto dto) throws IOException {
+	public ResponseEntity<BaseResponse<Boolean>> uploadExpenseMedia(UploadFileRequestDto dto) throws IOException {
 		
 		String uploadedImageUrl = mediaFileService.saveImage(dto);
 		
@@ -38,5 +39,18 @@ public class MediaFileController {
 		
 	}
 	
+	@PostMapping(value = UPLOAD_PROFILE_PICTURE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<BaseResponse<Boolean>> uploadProfilePicture(UploadProfilePicture dto) throws IOException {
+		
+		String uploadedImageUrl = mediaFileService.saveProfilePicture(dto);
+		
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+		                                     .data(true)
+		                                     .message("dosya başarıyla yüklendi")
+		                                     .code(200)
+		                                     .success(true)
+		                                     .build());
+		
+	}
 	
 }

@@ -2,6 +2,7 @@ package org.example.java15grup2proje.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.java15grup2proje.dto.request.AddEmployeeRequestDto;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
 import org.example.java15grup2proje.dto.request.TokenRefreshRequest;
@@ -16,6 +17,8 @@ import org.example.java15grup2proje.service.UserService;
 import org.example.java15grup2proje.utility.JwtManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.example.java15grup2proje.constant.RestApi.*;
 
@@ -90,5 +93,26 @@ public class UserController {
 		return ResponseEntity.ok(BaseResponse.<ProfileResponseDto>builder().code(200).data(profile).message("Manager register " +
 				                                                                                                    "successful" +
 				                                                                                                    ".").success(true).build());
+	}
+	
+	@GetMapping(GET_MY_EMPLOYEES)
+	public ResponseEntity<BaseResponse<List<ProfileResponseDto>>> getMyEmployees(String token){
+		
+		List<ProfileResponseDto> myEmployees = userService.getMyEmployees(token);
+		return ResponseEntity.ok(BaseResponse.<List<ProfileResponseDto>>builder()
+		                                     .code(200).data(myEmployees)
+                                                .message("Manager register " +
+                                                                    "successful" +
+                                                                    ".").success(true).build());
+	}
+	
+	@PostMapping(ADD_EMPLOYEE)
+	public ResponseEntity<BaseResponse<Boolean>> addEmployee(@RequestBody @Valid AddEmployeeRequestDto dto){
+		userService.addEmployee(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+		                                     .code(200).data(true)
+		                                     .message("Manager register " +
+				                                              "successful" +
+				                                              ".").success(true).build());
 	}
 }

@@ -54,4 +54,7 @@ public class RestApi {
 	public static final String GET_ALL_COMMENTS =  "/get-all-comments";
 	
 	public static final String UPLOAD_MEDIA = "/upload-media";
+	public static final String UPLOAD_PROFILE_PICTURE = "/upload-profile-picture";
+	public static final String GET_MY_EMPLOYEES = "/get-my-employees";
+	public static final String ADD_EMPLOYEE = "/add-employee";
 }

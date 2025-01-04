@@ -1,8 +1,12 @@
 package org.example.java15grup2proje.service;
 
 import org.example.java15grup2proje.dto.request.UploadFileRequestDto;
+import org.example.java15grup2proje.dto.request.UploadProfilePicture;
+import org.example.java15grup2proje.entity.Auth;
 import org.example.java15grup2proje.entity.Expense;
 import org.example.java15grup2proje.entity.MediaFile;
+import org.example.java15grup2proje.entity.User;
+import org.example.java15grup2proje.entity.enums.EFileType;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.repository.MediaFileRepository;
@@ -20,13 +24,15 @@ public class MediaFileService {
 	private final CloudinaryService cloudinaryService;
 	private final AuthService authService;
 	private final ExpenseService expenseService;
+	private final UserService userService;
 	
 	public MediaFileService(MediaFileRepository mediaFileRepository, CloudinaryService cloudinaryService,
-	                        AuthService authService, ExpenseService expenseService) {
+	                        AuthService authService, ExpenseService expenseService, UserService userService) {
 		this.authService = authService;
 		this.mediaFileRepository = mediaFileRepository;
 		this.cloudinaryService = cloudinaryService;
 		this.expenseService = expenseService;
+		this.userService = userService;
 	}
 	
 	/*public void save(AddImageMyProductRequestDto dto) {
@@ -41,7 +47,7 @@ public class MediaFileService {
 		String expenseId = dto.expenseId();
 		// Dosya boyutunu kontrol et
 		
-		if (file.getSize() > 5 * 1024 * 1024) {
+		if (file.getSize() > 2 * 1024 * 1024) {
 			throw new Java15Grup2ProjeAppException(ErrorType.IMAGE_SIZE_ERROR);
 		}
 		
@@ -62,6 +68,7 @@ public class MediaFileService {
 				break;
 			case PDF: expense.setFileUrl(uploadedImageUrl);
 				expenseService.save(expense);
+				break;
 			default: throw new Java15Grup2ProjeAppException(ErrorType.INVALID_FILE_TYPE);
 		}
 		
@@ -75,4 +82,24 @@ public class MediaFileService {
 	}
 	
 	
+	public String saveProfilePicture(UploadProfilePicture dto) throws IOException{
+		User user = userService.tokenToUser(dto.token());
+		
+		MultipartFile file = dto.file();
+		
+		if (file.getSize() > 2 * 1024 * 1024) {
+			throw new Java15Grup2ProjeAppException(ErrorType.IMAGE_SIZE_ERROR);
+		}
+		// Dosyayı byte array'e çevir
+		byte[] imageBytes = file.getBytes();
+		// Cloudinary veya başka bir servise resmi yükle
+		Map uploadResult = cloudinaryService.uploadImage(imageBytes, EFileType.IMAGE);
+		
+		// Yüklenen resmin URL'sini al
+		String uploadedImageUrl = uploadResult.get("url").toString();
+		
+		user.setPictureUrl(uploadedImageUrl);
+		userService.save(user);
+		return uploadedImageUrl;
+	}
 }

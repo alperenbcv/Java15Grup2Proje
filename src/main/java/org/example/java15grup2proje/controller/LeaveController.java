@@ -52,7 +52,7 @@ public class LeaveController {
 	}
 	
 	@PostMapping(MANAGE_LEAVE)
-	public ResponseEntity<BaseResponse<Boolean>> getPendingLeaves(@RequestBody @Valid ManageLeaveDto dto){
+	public ResponseEntity<BaseResponse<Boolean>> manageLeaveState(@RequestBody @Valid ManageLeaveDto dto){
 		leaveService.manageLeave(dto);
 		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
 		                                     .code(200)
