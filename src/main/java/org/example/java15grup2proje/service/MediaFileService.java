@@ -1,11 +1,10 @@
 package org.example.java15grup2proje.service;
 
+import jakarta.validation.Valid;
 import org.example.java15grup2proje.dto.request.UploadFileRequestDto;
+import org.example.java15grup2proje.dto.request.UploadPersonnelFileRequestDto;
 import org.example.java15grup2proje.dto.request.UploadProfilePicture;
-import org.example.java15grup2proje.entity.Auth;
-import org.example.java15grup2proje.entity.Expense;
-import org.example.java15grup2proje.entity.MediaFile;
-import org.example.java15grup2proje.entity.User;
+import org.example.java15grup2proje.entity.*;
 import org.example.java15grup2proje.entity.enums.EFileType;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
@@ -15,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,14 +25,17 @@ public class MediaFileService {
 	private final AuthService authService;
 	private final ExpenseService expenseService;
 	private final UserService userService;
+	private final PersonnelFileService personnelFileService;
 	
 	public MediaFileService(MediaFileRepository mediaFileRepository, CloudinaryService cloudinaryService,
-	                        AuthService authService, ExpenseService expenseService, UserService userService) {
+	                        AuthService authService, ExpenseService expenseService, UserService userService,
+	                        PersonnelFileService personnelFileService) {
 		this.authService = authService;
 		this.mediaFileRepository = mediaFileRepository;
 		this.cloudinaryService = cloudinaryService;
 		this.expenseService = expenseService;
 		this.userService = userService;
+		this.personnelFileService = personnelFileService;
 	}
 	
 	/*public void save(AddImageMyProductRequestDto dto) {
@@ -101,5 +104,13 @@ public class MediaFileService {
 		user.setPictureUrl(uploadedImageUrl);
 		userService.save(user);
 		return uploadedImageUrl;
+	}
+	
+	public List<PersonnelFile> getFilesOfMyPersonnel(String token) {
+		return personnelFileService.getFilesOfMyPersonnel(token);
+	}
+	
+	public void uploadPersonnelFile(@Valid UploadPersonnelFileRequestDto dto) throws IOException {
+		personnelFileService.uploadPersonnelFile(dto);
 	}
 }

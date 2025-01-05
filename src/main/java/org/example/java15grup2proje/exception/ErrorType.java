@@ -21,7 +21,8 @@ public enum ErrorType {
 	EXISTING_COMMENT(7002, "you already have a submitted comment in the system, you have to either delete or edit it", HttpStatus.BAD_REQUEST),
 	IMAGE_SIZE_ERROR(8001, "image too large", HttpStatus.BAD_REQUEST),
 	EXPENSE_NOT_FOUND(9001, "expense id is invalid", HttpStatus.BAD_REQUEST),
-	INVALID_FILE_TYPE(9002,"file type entered is invalid" , HttpStatus.BAD_REQUEST);
+	INVALID_FILE_TYPE(9002,"file type entered is invalid" ,
+	                  HttpStatus.BAD_REQUEST), FILE_NOT_FOUND(9003, "file you want to change could not be found",HttpStatus.BAD_REQUEST );
 	
 	int code;
 	String message;

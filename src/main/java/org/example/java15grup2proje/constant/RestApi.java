@@ -17,6 +17,7 @@ public class RestApi {
 	public static final String EXPENSE = ROOT + "/expense";
 	public static final String COMMENT = ROOT + "/comment";
 	public static final String MEDIA_FILE = ROOT + "/media-file";
+	public static final String PERSONNEL_FILE = "/personnel-file";
 	
 	public static final String REGISTER = "/register";
 	public static final String LOGIN = "/login";
@@ -57,4 +58,7 @@ public class RestApi {
 	public static final String UPLOAD_PROFILE_PICTURE = "/upload-profile-picture";
 	public static final String GET_MY_EMPLOYEES = "/get-my-employees";
 	public static final String ADD_EMPLOYEE = "/add-employee";
+	
+	public static final String GET_FILES_OF_MY_PERSONNEL = "/get-files";
+	public static final String UPLOAD_PERSONNEL_FILE = "/upload-file";
 }

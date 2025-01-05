@@ -1,10 +1,13 @@
 package org.example.java15grup2proje.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.UploadFileRequestDto;
+import org.example.java15grup2proje.dto.request.UploadPersonnelFileRequestDto;
 import org.example.java15grup2proje.dto.request.UploadProfilePicture;
 import org.example.java15grup2proje.dto.response.BaseResponse;
 import org.example.java15grup2proje.entity.MediaFile;
+import org.example.java15grup2proje.entity.PersonnelFile;
 import org.example.java15grup2proje.service.CloudinaryService;
 import org.example.java15grup2proje.service.MediaFileService;
 import org.springframework.http.MediaType;
@@ -15,6 +18,7 @@ import static org.example.java15grup2proje.constant.RestApi.*;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -51,6 +55,28 @@ public class MediaFileController {
 		                                     .success(true)
 		                                     .build());
 		
+	}
+	
+	@GetMapping(GET_FILES_OF_MY_PERSONNEL)
+	public ResponseEntity<BaseResponse<java.util.List<PersonnelFile>>> getFilesOfMyPersonnel(String token){
+		return ResponseEntity.ok(BaseResponse.<List<PersonnelFile>>builder()
+		                                     .data(mediaFileService.getFilesOfMyPersonnel(token))
+		                                     .message("personnel file başarıyla getirildi")
+		                                     .code(200)
+		                                     .success(true)
+		                                     .build());
+	}
+	
+	@PostMapping(value= UPLOAD_PERSONNEL_FILE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<BaseResponse<Boolean>> addPersonnelFile(UploadPersonnelFileRequestDto dto) throws
+	                                                                                                                     IOException {
+		mediaFileService.uploadPersonnelFile(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+		                                     .data(true)
+		                                     .success(true)
+		                                     .code(200)
+		                                     .message("personnel file successfully uploaded")
+		                                     .build());
 	}
 	
 }

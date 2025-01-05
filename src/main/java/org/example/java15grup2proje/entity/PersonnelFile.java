@@ -13,9 +13,11 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "tblpersonnelfile")
 public class PersonnelFile extends BaseEntity {
-	Long personnelId;
+	String personnelId;
+	String personnelName;
 	String fileType;
 	String fileName;
 	String fileUrl;
-	Long uploadDate;
+	@Builder.Default
+	Long uploadDate = System.currentTimeMillis();
 }

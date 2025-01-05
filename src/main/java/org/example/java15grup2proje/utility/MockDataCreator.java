@@ -20,6 +20,7 @@ public class MockDataCreator {
 	private final AdminRepository adminRepository;
 	private final LeaveRepository leaveRepository;
 	private final CommentRepository commentRepository;
+	private final PersonnelFileRepository personnelFileRepository;
 	@Bean
 	CommandLineRunner createMockData() {
 		return args -> {
@@ -80,6 +81,9 @@ public class MockDataCreator {
 				                            .gender(EGender.WOMAN)
 						.phoneNumber("09998887766")
 						.companyId("Example Company ID")
+						.title("Backend Developer")
+						.department(EDepartment.IT)
+						.address("Istanbul/ Turkey")
 				                            .managerId((manager == null)?"0":manager.getId())
 				                            .role(ERole.EMPLOYEE)
 						.pictureUrl("https://townsquare.media/site/180/files/2018/02/Jane-Smith-Edited.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89")
@@ -87,7 +91,16 @@ public class MockDataCreator {
 				employeeRepository.save(employee2);
 				System.out.println("Mock Employee Created: " + employee2);
 			
-
+				PersonnelFile file = PersonnelFile.builder()
+				                                  .fileType("file tysaepe")
+						.fileUrl("https://images2.fanpop.com/images/photos/7900000/JOHN-DOE-john-doe-7969094-2087-2560.jpg")
+						.fileName("file fnae m")
+						.personnelName("Jane Smith")
+						.personnelId(employee2.getId())
+						.uploadDate(1736071498000L)
+						                          .build();
+				
+				personnelFileRepository.save(file);
 				 Employee employee = Employee.builder()
 						.name("Burak")
 						.surname("BB")
