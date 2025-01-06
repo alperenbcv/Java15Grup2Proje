@@ -3,6 +3,7 @@ package org.example.java15grup2proje.service;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.AddEmployeeRequestDto;
+import org.example.java15grup2proje.dto.request.DeactivateEmployeeDto;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
@@ -53,6 +54,7 @@ public class UserService {
 			return dto;
 		}
 		User user = tokenToUser(token);
+		if (user.getState() == 0) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
 		return userToProfile(user);
 	}
 	
@@ -101,6 +103,7 @@ public class UserService {
 		if (!passwordMatches) {
 			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_MAIL_OR_PASSWORD);
 		}
+		if (optionalUser.get().getState() == 0) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
 		String token = jwtManager.createToken(optionalUser.get().getId(), optionalUser.get().getRole().toString());
 		
 		return token;
@@ -152,5 +155,13 @@ public class UserService {
 		if (!dto.password().equals(dto.repassword())) throw new Java15Grup2ProjeAppException(ErrorType.PASSWORD_ERROR);
 		Employee employee = UserMapper.INSTANCE.fromAddEmployeeToEmployee(dto, user.getId());
 		employeeService.save(employee);
+	}
+	
+	public void deactivateEmployeeByEmail(DeactivateEmployeeDto dto) {
+		User user = tokenToUser(dto.token());
+		if (user.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		Employee employee = employeeService.findByEmail(dto.employeeEmail());
+		if (!employee.getManagerId().equals(user.getId())) throw new Java15Grup2ProjeAppException(ErrorType.NO_PERMISSION);
+		employeeService.delete(employee);
 	}
 }

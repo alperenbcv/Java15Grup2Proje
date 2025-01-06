@@ -61,4 +61,5 @@ public class RestApi {
 	
 	public static final String GET_FILES_OF_MY_PERSONNEL = "/get-files";
 	public static final String UPLOAD_PERSONNEL_FILE = "/upload-file";
+	public static final String DEACTIVATE_EMPLOYEE = "/deactivate-employee";
 }

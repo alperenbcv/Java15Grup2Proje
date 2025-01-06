@@ -2,10 +2,7 @@ package org.example.java15grup2proje.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.java15grup2proje.dto.request.AddEmployeeRequestDto;
-import org.example.java15grup2proje.dto.request.EditProfileDto;
-import org.example.java15grup2proje.dto.request.LoginRequestDto;
-import org.example.java15grup2proje.dto.request.TokenRefreshRequest;
+import org.example.java15grup2proje.dto.request.*;
 import org.example.java15grup2proje.dto.response.BaseResponse;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
 import org.example.java15grup2proje.dto.response.TokenRefreshResponse;
@@ -114,5 +111,13 @@ public class UserController {
 		                                     .message("Manager register " +
 				                                              "successful" +
 				                                              ".").success(true).build());
+	}
+	
+	@PostMapping(DEACTIVATE_EMPLOYEE)
+	public ResponseEntity<BaseResponse<Boolean>> deactivateEmployee(@RequestBody DeactivateEmployeeDto dto){
+		userService.deactivateEmployeeByEmail(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+		                                     .code(200).data(true)
+		                                     .message("employee deleted successfully").success(true).build());
 	}
 }

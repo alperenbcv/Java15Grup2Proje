@@ -50,18 +50,34 @@ public class EmployeeService {
 	public List<Employee> getPersonnelByCompanyId(String token) {
 		Manager manager = managerService.tokenToManager(token);
 		String companyId = manager.getCompanyId();
-		return employeeRepository.findAllByCompanyId(companyId);
+		return employeeRepository.findAllByCompanyId(companyId).stream().filter(employee->employee.getState() != 0).toList();
 	}
 	
 	public Employee findById(String s) {
-		return employeeRepository.findById(s).get();
+		
+		Optional<Employee> employee = employeeRepository.findById(s);
+		if (employee.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		else if (employee.get().getState() == 0) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		return employee.get();
 	}
 	
 	public List<Employee> findAllByManagerId(String id) {
-		return employeeRepository.findAllByManagerId(id);
+		return employeeRepository.findAllByManagerId(id).stream().filter(employee->employee.getState() != 0).toList();
 	}
 	
 	public void save(Employee employee) {
+		employeeRepository.save(employee);
+	}
+	
+	public Employee findByEmail(String email) {
+		Optional<Employee> optEmployee = employeeRepository.findByEmail(email);
+		if (optEmployee.isEmpty()) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		else if (optEmployee.get().getState() == 0) throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		return optEmployee.get();
+	}
+	
+	public void delete(Employee employee) {
+		employee.setState(0);
 		employeeRepository.save(employee);
 	}
 }
