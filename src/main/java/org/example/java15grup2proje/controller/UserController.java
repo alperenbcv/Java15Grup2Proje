@@ -31,10 +31,9 @@ public class UserController {
 	
 	@PostMapping(LOGIN)
 	public ResponseEntity<BaseResponse<String>> doLogin(@RequestBody @Valid LoginRequestDto dto) {
-		String token = userService.login(dto);
 		return ResponseEntity.ok(BaseResponse.<String>builder().code(200).success(true).message("Manager login " +
 				                                                                                        "successful.")
-		                                     .data(token).build());
+		                                     .data(userService.login(dto)).build());
 		
 	}
 	
@@ -119,5 +118,13 @@ public class UserController {
 		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
 		                                     .code(200).data(true)
 		                                     .message("employee deleted successfully").success(true).build());
+	}
+	
+	@PostMapping(ALTER_ACCOUNT_ACTIVATION)
+	public ResponseEntity<BaseResponse<Boolean>> alterAccountActivation(@RequestBody DeactivateEmployeeDto dto){
+		userService.alterAccountActivation(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+		                                     .code(200).data(true)
+		                                     .message("employee activation altered successfully").success(true).build());
 	}
 }

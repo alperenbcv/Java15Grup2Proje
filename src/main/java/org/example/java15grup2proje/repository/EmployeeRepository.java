@@ -31,4 +31,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 	
 	@Query("SELECT new org.example.java15grup2proje.model.EmployeeNameSurname(e.name,e.surname) FROM Employee as e WHERE e.id IN ?1")
 	List<EmployeeNameSurname> findEmployeeNameSurnameByIdIn(List<String> id);
+	
+	List<Employee> findAllByCompanyIdAndState(String companyId, int state);
 }

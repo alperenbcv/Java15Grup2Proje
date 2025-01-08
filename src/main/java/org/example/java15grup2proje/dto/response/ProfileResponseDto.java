@@ -20,8 +20,8 @@ public class ProfileResponseDto {
 	String pictureUrl;
 	String address;
 	EGender gender;
-	boolean isAccountVerified = false;
-	boolean isAccountActive = false;
+	boolean isAccountVerified;
+	boolean isAccountActive;
 	EDepartment department;
 	String title;
 	private Long hireDate;

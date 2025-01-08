@@ -77,6 +77,7 @@ public class AuthService {
 		if (!passwordMatches) {
 			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_MAIL_OR_PASSWORD);
 		}
+		if (!auth.isAccountActive()) return LoginResponseDto.builder().token("notActive").build();
 		String token = jwtManager.createToken(auth.getId(), auth.getRole().toString());
 		return LoginResponseDto.builder().role(auth.getRole()).token(token).build();
 		

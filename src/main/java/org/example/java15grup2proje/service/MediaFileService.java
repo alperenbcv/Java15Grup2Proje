@@ -113,4 +113,8 @@ public class MediaFileService {
 	public void uploadPersonnelFile(@Valid UploadPersonnelFileRequestDto dto) throws IOException {
 		personnelFileService.uploadPersonnelFile(dto);
 	}
+	
+	public void addNewPersonnelFile(UploadPersonnelFileRequestDto dto) throws IOException{
+		personnelFileService.addNewPersonnelFile(dto);
+	}
 }

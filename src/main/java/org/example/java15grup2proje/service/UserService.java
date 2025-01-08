@@ -1,7 +1,6 @@
 package org.example.java15grup2proje.service;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.AddEmployeeRequestDto;
 import org.example.java15grup2proje.dto.request.DeactivateEmployeeDto;
 import org.example.java15grup2proje.dto.request.EditProfileDto;
@@ -16,7 +15,6 @@ import org.example.java15grup2proje.repository.UserRepository;
 import org.example.java15grup2proje.utility.JwtManager;
 import org.example.java15grup2proje.utility.PasswordHasher;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -145,7 +143,7 @@ public class UserService {
 	public List<ProfileResponseDto> getMyEmployees(String token) {
 		User user = tokenToUser(token);
 		if (user.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
-		List<Employee> myEmployees = employeeService.findAllByManagerId(user.getId());
+		List<Employee> myEmployees = employeeService.findAllByCompanyId(user.getCompanyId());
 		return myEmployees.stream().map(employee-> UserMapper.INSTANCE.fromEmployeeToProfile(employee)).toList();
 	}
 	
@@ -160,8 +158,17 @@ public class UserService {
 	public void deactivateEmployeeByEmail(DeactivateEmployeeDto dto) {
 		User user = tokenToUser(dto.token());
 		if (user.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
-		Employee employee = employeeService.findByEmail(dto.employeeEmail());
+		Employee employee = employeeService.findByEmail(dto.employeeMail());
 		if (!employee.getManagerId().equals(user.getId())) throw new Java15Grup2ProjeAppException(ErrorType.NO_PERMISSION);
 		employeeService.delete(employee);
+	}
+	
+	public void alterAccountActivation(DeactivateEmployeeDto dto) {
+		User user = tokenToUser(dto.token());
+		if (user.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		Employee employee = employeeService.findByEmail(dto.employeeMail());
+		if (!employee.getCompanyId().equals(user.getCompanyId())) throw new Java15Grup2ProjeAppException(ErrorType.NO_PERMISSION);
+		employee.setAccountActive(!employee.isAccountActive());
+		employeeService.save(employee);
 	}
 }
