@@ -14,6 +14,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Random;
+import java.util.UUID;
+
 @Configuration
 @RequiredArgsConstructor
 public class MockDataCreator {
@@ -61,7 +64,7 @@ public class MockDataCreator {
 				                            .email("jane.smith@example.com")
 				                            .password(PasswordHasher.passwordHash("Alperen1+"))
 				                            .gender(EGender.WOMAN)
-				                            .managerId(1L)
+				                            .managerId(UUID.randomUUID().toString())
 				                            .role(ERole.EMPLOYEE)
 				                            .build();
 				employeeRepository.save(employee);

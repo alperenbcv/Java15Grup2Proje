@@ -1,10 +1,9 @@
 package org.example.java15grup2proje.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.example.java15grup2proje.entity.enums.EState;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,5 +25,6 @@ public class Company extends BaseEntity {
 	String companyLogoUrl;
 	String companyWebSite;
 	Long membershipPlanId;
-	
+	@Enumerated(EnumType.STRING)
+	EState accountState;
 }

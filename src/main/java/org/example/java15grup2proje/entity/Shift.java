@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.java15grup2proje.entity.enums.EShiftType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -21,6 +22,14 @@ public class Shift extends BaseEntity{
 	EShiftType shiftType;
 	Long startDate;
 	Long endDate;
-	Long personnelId;
-	boolean isOverTime;
+	String companyId;
+	Long shiftDate;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(
+			name = "employee_shift",
+			joinColumns = @JoinColumn(name = "shift_id"),
+			inverseJoinColumns = @JoinColumn(name = "employee_id")
+	)
+	List<Employee> employeeList;
+
 }

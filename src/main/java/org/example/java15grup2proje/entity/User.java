@@ -10,10 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.example.java15grup2proje.entity.enums.EDepartment;
-import org.example.java15grup2proje.entity.enums.EGender;
-import org.example.java15grup2proje.entity.enums.ERole;
-import org.example.java15grup2proje.entity.enums.ETitle;
+import org.example.java15grup2proje.entity.enums.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,4 +41,6 @@ public abstract class User extends BaseEntity {
 	private String companyId;
 	@Enumerated(EnumType.STRING)
 	ERole role;
+	@Column(unique = true)
+	private String activationToken;
 }

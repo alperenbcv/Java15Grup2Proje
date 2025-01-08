@@ -17,5 +17,5 @@ import org.example.java15grup2proje.entity.enums.ETitle;
 @Entity
 @Table(name = "tblemployee")
 public class Employee extends User{
-	private Long managerId;
+	private String managerId;
 }

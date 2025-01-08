@@ -28,4 +28,6 @@ public abstract class BaseEntity {
 	private Long updatedAt = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 	@Builder.Default
 	private Integer state = 1;
+	@Builder.Default
+	private Boolean isDeleted = false;
 }

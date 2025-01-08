@@ -43,6 +43,14 @@ dependencies {
 
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
+
+
+    // https://mvnrepository.com/artifact/com.google.api-client/google-api-client
+    implementation 'com.google.api-client:google-api-client:2.7.1'
+// https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.37.0'
+    implementation 'com.google.apis:google-api-services-gmail:v1-rev20240520-2.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {

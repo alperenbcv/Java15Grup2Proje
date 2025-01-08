@@ -2,8 +2,8 @@ package org.example.java15grup2proje.service;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.exception.ErrorType;
-import org.example.exception.Java15Grup2ProjeAppException;
+import org.example.java15grup2proje.exception.ErrorType;
+import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
 import org.example.java15grup2proje.dto.request.AdminRegisterRequestDto;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
 import org.example.java15grup2proje.entity.Admin;
@@ -11,7 +11,7 @@ import org.example.java15grup2proje.entity.enums.ERole;
 import org.example.java15grup2proje.repository.AdminRepository;
 import org.example.java15grup2proje.utility.JwtManager;
 import org.example.java15grup2proje.utility.PasswordHasher;
-import org.example.mapper.AdminMapper;
+import org.example.java15grup2proje.mapper.AdminMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

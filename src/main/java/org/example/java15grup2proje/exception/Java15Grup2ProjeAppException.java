@@ -1,5 +1,8 @@
-package org.example.exception;
+package org.example.java15grup2proje.exception;
 
+import lombok.Getter;
+
+@Getter
 public class Java15Grup2ProjeAppException extends RuntimeException {
 	private ErrorType errorType;
 	public Java15Grup2ProjeAppException(ErrorType errorType){
