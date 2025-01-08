@@ -6,7 +6,7 @@ public record UploadPersonnelFileRequestDto(
 		MultipartFile file,
 		String token,
 		String personnelName,
-		String personnelId,
+		String personnelMail,
 		String fileType,
 		String fileName,
 		String oldFileId

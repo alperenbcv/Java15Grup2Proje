@@ -29,9 +29,16 @@ public class AuthController {
 	
 	@PostMapping(LOGIN)
 	public ResponseEntity<BaseResponse<LoginResponseDto>> doLogin(@RequestBody @Valid LoginRequestDto dto) {
-		return ResponseEntity.ok(BaseResponse.<LoginResponseDto>builder().code(200).success(true).message("Manager login " +
+		LoginResponseDto response = authService.login(dto);
+		if (response.getToken().equals("notActive")) return ResponseEntity.ok(BaseResponse.<LoginResponseDto>builder()
+				                                                                      .code(400)
+				                                                                      .success(false)
+				                                                                      .message("account is not active")
+				                                                                      .data(response)
+		                                                                  .build());
+		else return ResponseEntity.ok(BaseResponse.<LoginResponseDto>builder().code(200).success(true).message("Manager login " +
 				                                                                                        "successful.")
-		                                     .data(authService.login(dto)).build());
+		                                     .data(response).build());
 		
 	}
 	

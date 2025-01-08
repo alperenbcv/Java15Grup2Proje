@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PersonnelFileRepository extends JpaRepository<PersonnelFile, String> {
-	List<PersonnelFile> findAllByPersonnelIdInAndState(List<String> personnelId, Integer state);
+	
+	List<PersonnelFile> findAllByPersonnelMailInAndState(List<String> employeeIdList, int i);
 }

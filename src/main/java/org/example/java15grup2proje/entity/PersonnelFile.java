@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "tblpersonnelfile")
 public class PersonnelFile extends BaseEntity {
-	String personnelId;
+	String personnelMail;
 	String personnelName;
 	String fileType;
 	String fileName;

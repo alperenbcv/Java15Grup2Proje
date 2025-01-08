@@ -68,7 +68,7 @@ public class MediaFileController {
 	}
 	
 	@PostMapping(value= UPLOAD_PERSONNEL_FILE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<BaseResponse<Boolean>> addPersonnelFile(UploadPersonnelFileRequestDto dto) throws
+	public ResponseEntity<BaseResponse<Boolean>> uploadPersonnelFile(UploadPersonnelFileRequestDto dto) throws
 	                                                                                                                     IOException {
 		mediaFileService.uploadPersonnelFile(dto);
 		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
@@ -76,6 +76,18 @@ public class MediaFileController {
 		                                     .success(true)
 		                                     .code(200)
 		                                     .message("personnel file successfully uploaded")
+		                                     .build());
+	}
+	
+	@PostMapping(value= ADD_NEW_PERSONNEL_FILE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<BaseResponse<Boolean>> addNewPersonnelFile(UploadPersonnelFileRequestDto dto) throws
+	                                                                                                    IOException {
+		mediaFileService.addNewPersonnelFile(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+		                                     .data(true)
+		                                     .success(true)
+		                                     .code(200)
+		                                     .message("personnel file successfully added")
 		                                     .build());
 	}
 	

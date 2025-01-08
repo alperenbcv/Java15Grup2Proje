@@ -32,8 +32,8 @@ public class PersonnelFileService {
 		Auth auth = authService.tokenToAuth(token);
 		if (auth.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
 		List<Employee> employees = employeeService.findAllByManagerId(auth.getId());
-		List<String> employeeIdList = employees.stream().map(employee -> employee.getId()).toList();
-		return personnelFileRepository.findAllByPersonnelIdInAndState(employeeIdList, 1);
+		List<String> employeeIdList = employees.stream().map(employee -> employee.getEmail()).toList();
+		return personnelFileRepository.findAllByPersonnelMailInAndState(employeeIdList, 1);
 	}
 	
 	public void uploadPersonnelFile(@Valid UploadPersonnelFileRequestDto dto) throws IOException {
@@ -62,5 +62,29 @@ public class PersonnelFileService {
 		PersonnelFile personnelFile = PersonnelFileMapper.INSTANCE.fromUploadDtoToFile(dto, uploadedImageUrl);
 		personnelFileRepository.save(personnelFile);
 		personnelFileRepository.save(optFile.get());
+	}
+	
+	public void addNewPersonnelFile(UploadPersonnelFileRequestDto dto) throws IOException {
+		Auth auth =authService.tokenToAuth(dto.token());
+		if (auth.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		
+		MultipartFile file = dto.file();
+		// Dosya boyutunu kontrol et
+		
+		if (file.getSize() > 2 * 1024 * 1024) {
+			throw new Java15Grup2ProjeAppException(ErrorType.IMAGE_SIZE_ERROR);
+		}
+		
+		// Dosyayı byte array'e çevir
+		byte[] imageBytes = file.getBytes();
+		
+		// Cloudinary veya başka bir servise resmi yükle
+		Map uploadResult = cloudinaryService.uploadImage(imageBytes, EFileType.PDF);
+		
+		// Yüklenen resmin URL'sini al
+		String uploadedImageUrl = uploadResult.get("url").toString();
+		
+		PersonnelFile personnelFile = PersonnelFileMapper.INSTANCE.fromUploadDtoToFile(dto, uploadedImageUrl);
+		personnelFileRepository.save(personnelFile);
 	}
 }

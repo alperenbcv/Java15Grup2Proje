@@ -25,8 +25,6 @@ public class User extends Auth {
 	EGender gender;
 	@Builder.Default
 	boolean isAccountVerified = false;
-	@Builder.Default
-	boolean isAccountActive = false;
 	@Enumerated(EnumType.STRING)
 	EDepartment department;
 	String title;

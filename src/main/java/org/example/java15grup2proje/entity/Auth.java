@@ -22,4 +22,6 @@ public class Auth extends BaseEntity{
 	String password;
 	@Enumerated(EnumType.STRING)
 	ERole role;
+	@Builder.Default
+	boolean isAccountActive = false;
 }

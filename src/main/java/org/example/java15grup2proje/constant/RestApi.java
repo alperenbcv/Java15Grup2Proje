@@ -76,4 +76,6 @@ public class RestApi {
 	public static final String APP_MAIL_ADDRESS = "corehr@java15.iam.gserviceaccount.com";
 	public static final String ACTIVATE_EMPLOYEE_ACC = "/activate-employee";
 	public static final String ACCOUNT_ACTIVATION = "/activate";
+	public static final String ADD_NEW_PERSONNEL_FILE = "/add-new-personnel-file";
+	public static final String ALTER_ACCOUNT_ACTIVATION= "/alter-account-activation";
 }

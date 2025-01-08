@@ -5,11 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.EmployeeActivationRequestDto;
 import org.example.java15grup2proje.dto.request.EmployeeRegisterRequestDto;
 import org.example.java15grup2proje.entity.Manager;
-import org.example.java15grup2proje.entity.User;
 import org.example.java15grup2proje.exception.ErrorType;
 import org.example.java15grup2proje.exception.Java15Grup2ProjeAppException;
-import org.example.java15grup2proje.dto.request.LoginRequestDto;
-import org.example.java15grup2proje.dto.request.RegisterRequestDto;
 import org.example.java15grup2proje.entity.Employee;
 import org.example.java15grup2proje.entity.enums.ERole;
 import org.example.java15grup2proje.model.EmployeeNameSurname;
@@ -125,5 +122,9 @@ public class EmployeeService {
 	
 	public boolean existsById(String id){
 		return employeeRepository.existsById(id);
+	}
+	
+	public List<Employee> findAllByCompanyId(String companyId) {
+		return employeeRepository.findAllByCompanyIdAndState(companyId, 1);
 	}
 }
