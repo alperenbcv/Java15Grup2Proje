@@ -1,0 +1,51 @@
+server:
+  port: 9090
+
+spring:
+  security:
+    user:
+      name: ${java15grup2proje_security_name}
+      password: ${java15grup2proje_security_password}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${java15grup2proje_postgre_url}
+    username: ${java15grup2proje_postgre_username}
+    password: ${java15grup2proje_postgre_password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      enabled: true
+      max-request-size: 2MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${java15grup2proje_mail_address}
+    password: ${java15grup2proje_mail_app_password}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+logging:
+  level:
+    root: info
+    com.muhammet.java15_x: trace
+  logback:
+    rollingpolicy:
+      max-file-size: 2MB
+  file:
+    path: ./log
+
+java15grup2proje:
+  jwt:
+    secret-key: ${java15grup2proje_jwt_secretkey}
+    issuer: ${java15grup2proje_jwt_issuer}
+  refreshtoken:
+    duration: ${java15grup2proje_refreshtoken_duration}
+
+cloudinary:
+  cloud_name: ${cloudinary_cloudname}
+  api_key: ${cloudinary_apikey}
+  api_secret: ${cloudinary_apisecret}
