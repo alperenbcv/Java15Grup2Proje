@@ -17,7 +17,8 @@ public class Possession extends BaseEntity {
 	String personnelId;
 	String companyId;
 	String managerId;
-	Long lendingDate;
+	@Builder.Default
+	Long lendingDate = System.currentTimeMillis();
 	Long returnDate;
 	@Builder.Default
 	@Enumerated(EnumType.STRING)
