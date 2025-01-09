@@ -30,6 +30,7 @@ public class MockDataCreator {
 						.password(PasswordHasher.passwordHash("Qweqwe123!"))
 						.role(ERole.ADMIN)
 						.isSuperAdmin(true)
+						.isAccountActive(true)
 				                   .build();
 				adminRepository.save(admin);
 			}
