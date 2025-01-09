@@ -23,4 +23,7 @@ public class Possession extends BaseEntity {
 	@Builder.Default
 	@Enumerated(EnumType.STRING)
 	EState confirmationState = EState.PENDING;
+	
+	String employeeName;
+	String employeeMail;
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface PossessionRepository extends JpaRepository<Possession, String> {
 	
 	List<Possession> findAllByPersonnelId(String id);
+	
+	List<Possession> findAllByManagerId(String managerId);
 }

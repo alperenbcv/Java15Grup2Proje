@@ -40,7 +40,12 @@ public class PossessionService {
 	
 	public List<Possession> getMyPossessions(String token) {
 		Auth auth = authService.tokenToAuth(token);
-		List<Possession> possessionList = possessionRepository.findAllByPersonnelId(auth.getId());
+		List<Possession> possessionList;
+		switch(auth.getRole()){
+			case MANAGER -> possessionList = possessionRepository.findAllByManagerId(auth.getId());
+			case EMPLOYEE -> possessionList = possessionRepository.findAllByPersonnelId(auth.getId());
+			default -> throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
+		}
 		return possessionList;
 	}
 	
@@ -49,8 +54,12 @@ public class PossessionService {
 		if (manager.getRole() != ERole.MANAGER) throw new Java15Grup2ProjeAppException(ErrorType.ROLE_EXCEPTION);
 		Employee employee = employeeService.findByEmail(dto.personnelMail());
 		if (!employee.getCompanyId().equals(manager.getCompanyId())) throw new Java15Grup2ProjeAppException(ErrorType.NO_PERMISSION);
-		Possession possession = PossessionMapper.INSTANCE.fromAddToPossession(dto, employee.getId(), employee.getCompanyId(), manager.getId());
+		String employeeName = employee.getName() + " " + employee.getSurname();
+		Possession possession = PossessionMapper.INSTANCE.fromAddToPossession(dto, employeeName, employee.getEmail(),
+		                                                                      employee.getId(), employee.getCompanyId(), manager.getId());
 		possessionRepository.save(possession);
 	
 	}
+	
+	
 }
