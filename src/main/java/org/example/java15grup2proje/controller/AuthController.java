@@ -3,6 +3,7 @@ package org.example.java15grup2proje.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
+import org.example.java15grup2proje.dto.request.PasswordChangeRequestDto;
 import org.example.java15grup2proje.dto.request.TokenRefreshRequest;
 import org.example.java15grup2proje.dto.response.BaseResponse;
 import org.example.java15grup2proje.dto.response.LoginResponseDto;
@@ -55,6 +56,14 @@ public class AuthController {
 					                                                                                                                                "successfully created")
 			                                                               .data(TokenRefreshResponse.builder().accessToken(token).refreshToken(requestRefreshToken).build()).build());
 		                          }).orElseThrow(()->new Java15Grup2ProjeAppException(ErrorType.TOKEN_REFRESH_EXCEPTION));
+		
+	}
+	
+	@PostMapping(PASSWORD_CHANGE)
+	public ResponseEntity<BaseResponse<Boolean>> passwordChange(@Valid @RequestBody PasswordChangeRequestDto passwordChangeRequestDto, @RequestHeader("Authorization") String token){
+		String actualToken = token.replace("Bearer ", "");
+		authService.passwordChange(passwordChangeRequestDto, actualToken);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder().success(true).message("Password change is completed!").data(true).code(200).build());
 		
 	}
 	

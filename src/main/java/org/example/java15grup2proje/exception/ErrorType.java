@@ -28,7 +28,8 @@ public enum ErrorType {
 	SHIFT_NOT_FOUND(6000,"No shift found with the given id",HttpStatus.NOT_FOUND),
 	SHIFT_ALREADY_EXISTS(6001,"A shift already has been created for given day",HttpStatus.BAD_REQUEST),
 	ACTIVATION_TOKEN_EXPIRED(2002, "Activation token has expired!", HttpStatus.BAD_REQUEST),
-	ACCOUNT_ALREADY_ACTIVE(2003,"Your account has already been activated!",HttpStatus.BAD_REQUEST);
+	ACCOUNT_ALREADY_ACTIVE(2003,"Your account has already been activated!",HttpStatus.BAD_REQUEST),
+	INVALID_OLD_PASSWORD(1002,"Old password is not valid!",HttpStatus.BAD_REQUEST);
 	int code;
 	String message;
 	HttpStatus httpStatus;

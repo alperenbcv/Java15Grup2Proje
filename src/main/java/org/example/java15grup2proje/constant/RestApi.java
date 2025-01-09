@@ -80,4 +80,5 @@ public class RestApi {
 	public static final String ALTER_ACCOUNT_ACTIVATION= "/alter-account-activation";
 	public static final String ADD_POSSESSION = "/add-possession";
 	public static final String GET_MY_EMPLOYEES_POSSESSIONS = "/get-my-employees-possessions";
+	public static final String PASSWORD_CHANGE = "/password-change";
 }

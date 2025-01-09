@@ -3,6 +3,7 @@ package org.example.java15grup2proje.service;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.java15grup2proje.dto.request.LoginRequestDto;
+import org.example.java15grup2proje.dto.request.PasswordChangeRequestDto;
 import org.example.java15grup2proje.dto.response.LoginResponseDto;
 import org.example.java15grup2proje.dto.response.ProfileResponseDto;
 import org.example.java15grup2proje.entity.*;
@@ -81,5 +82,23 @@ public class AuthService {
 		String token = jwtManager.createToken(auth.getId(), auth.getRole().toString());
 		return LoginResponseDto.builder().role(auth.getRole()).token(token).build();
 		
+	}
+	
+	public void passwordChange(PasswordChangeRequestDto passwordDto, String token){
+		System.out.println(token);
+		Optional<String> optId = jwtManager.validateToken(token);
+		if(optId.isEmpty())
+			throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		String userId = optId.get();
+		Optional<Auth> optAuth = authRepository.findById(userId);
+		if(optAuth.isEmpty())
+			throw new Java15Grup2ProjeAppException(ErrorType.NOT_FOUND_USER);
+		Auth auth = optAuth.get();
+		if(!PasswordHasher.compareHashedPassword(passwordDto.oldPassword(), auth.getPassword()))
+			throw new Java15Grup2ProjeAppException(ErrorType.INVALID_OLD_PASSWORD);
+		if(!passwordDto.newPassword().equals(passwordDto.reNewPassword()))
+			throw new Java15Grup2ProjeAppException(ErrorType.PASSWORD_ERROR);
+		auth.setPassword(PasswordHasher.passwordHash(passwordDto.newPassword()));
+		authRepository.save(auth);
 	}
 }
