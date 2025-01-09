@@ -41,6 +41,7 @@ public class PossessionController {
 		
 	}
 	
+	
 	@PostMapping(ADD_POSSESSION)
 	public ResponseEntity<BaseResponse<Boolean>> addPossession(@RequestBody @Valid AddPossessionDto dto){
 		possessionService.addPossession(dto);
